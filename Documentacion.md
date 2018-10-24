@@ -18,22 +18,22 @@ El cliente del proyecto voy a ser yo.
 A lo largo del proyecto se tienen presente los siguientes hitos , sin embargo es posible que cambien a lo largo del proyecto
 
 
-Hito 0 - Uso correcto de Git y GitHub 
+Hito 0 - Uso correcto de Git y GitHub (https://github.com/danielbc09/Proyecto_CC/milestone/1)
 
-Hito 1 - Elección de unproyecto 
+Hito 1 - Elección de un proyecto (https://github.com/danielbc09/Proyecto_CC/milestone/2)
 
-Hito 2 - Definicion metodologia de trabajo Agil.
+Hito 2 - Definicion metodologia de trabajo Agil (https://github.com/danielbc09/Proyecto_CC/milestone/3)
 
-Hito 3 - Aprovicionamiento de maquinas virtuales
+Hito 3 - Aprovicionamiento de maquinas virtuales (https://github.com/danielbc09/Proyecto_CC/milestone/4)
 
-Hito 4 - Definición y configuración de la herramienta para despliegue (Pipeline).
+Hito 4 - Definición y configuración de la herramienta para despliegue.(https://github.com/danielbc09/Proyecto_CC/milestone/5)
 
-Hito 5 - Aprovisionar las maquinas virtuales.
+Hito 5 - Aprovisionar las maquinas virtuales. (https://github.com/danielbc09/Proyecto_CC/milestone/6)
 
-Hito 6 - Empezar desarrollo de los microservicios.
+Hito 6 - Empezar desarrollo de los microservicios. (https://github.com/danielbc09/Proyecto_CC/milestone/7)
 
-Hito 7 - Orquestar las maquinas virtuales
+Hito 7 - Orquestar las maquinas virtuales (https://github.com/danielbc09/Proyecto_CC/milestone/8)
 
-Hito 8 - Desarrollo e implementación de los contenedores.
+Hito 8 - Desarrollo e implementación de los contenedores. (https://github.com/danielbc09/Proyecto_CC/milestone/9)
 
-Hito 9 - Entrega del MVP (minimum viable product) al cliente.
+Hito 9 - Entrega del MVP (minimum viable product) al cliente. (https://github.com/danielbc09/Proyecto_CC/milestone/10)
