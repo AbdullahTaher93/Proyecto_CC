@@ -26,4 +26,26 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
+
+    @Override
+    public User createUser(User user){
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User updateUser(long id, User user) {
+        User findUser =  getUserById(id);
+
+        user.setUserId(findUser.getUserId());
+
+        return userRepository.save(user);
+
+    }
+
+    @Override
+    public void delete(long id) {
+        User findUser =  getUserById(id);
+        userRepository.delete(findUser);
+    }
+
 }
