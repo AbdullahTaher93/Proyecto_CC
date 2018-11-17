@@ -1,7 +1,7 @@
 package cc.project.busapp.controllers;
 
-import cc.project.busapp.domain.User;
-import cc.project.busapp.services.UserService;
+import cc.project.busapp.domain.Customer;
+import cc.project.busapp.services.CustomerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,21 +23,21 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class UserControllerTest {
+public class CustomerControllerTest {
 
 
     @Mock
-    UserService userService;
+    CustomerService userService;
 
     @InjectMocks
-    UserController userController;
+    CustomerController customerController;
 
     MockMvc mockMvc;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(userController)
+        mockMvc = MockMvcBuilders.standaloneSetup(customerController)
                 .setControllerAdvice(new RestResponseEntityExceptionHandler())
                 .build();
     }
@@ -46,13 +46,13 @@ public class UserControllerTest {
     @Test
     public void getAllCustomers() throws Exception {
 
-        User user1 = new User(1l, "Jhon Doe", "jhonDoe", "jhonDoe@mail.com");
-        User user2 = new User(2l, "Pamela J. Travis", "PamelaJT", "PamelaJTravis@gustr.com");
-        User user3 = new User(3l, "Willie D. Morrison", "WillieD", "WillieDMorrison@superrito");
+        Customer customer1 = new Customer(1l, "Jhon Doe", "jhonDoe", "jhonDoe@mail.com");
+        Customer customer2 = new Customer(2l, "Pamela J. Travis", "PamelaJT", "PamelaJTravis@gustr.com");
+        Customer customer3 = new Customer(3l, "Willie D. Morrison", "WillieD", "WillieDMorrison@superrito");
 
-        when(userService.getAllUsers()).thenReturn(Arrays.asList(user1, user2, user3));
+        when(userService.getAllCustomers()).thenReturn(Arrays.asList(customer1, customer2, customer3));
 
-        mockMvc.perform(get(UserController.BASE_URL)
+        mockMvc.perform(get(CustomerController.BASE_URL)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name", equalTo("Jhon Doe")));
@@ -61,54 +61,51 @@ public class UserControllerTest {
 
     @Test
     public void getUserById() throws Exception {
-         User user1 = new User();
-        user1.setName("Usuario Creado");
-        user1.setName("Jhon Does2");
-        user1.setEmail("usCreado@correo.com");
+         Customer customer1 = new Customer(1l,"Cliente Creado","Jhon Does2", "usCreado@correo.com");
 
-         when(userService.getUserById(anyLong())).thenReturn(user1);
+         when(userService.getCustomerById(anyLong())).thenReturn(customer1);
 
-        mockMvc.perform(get(UserController.BASE_URL+ "/1")
+        mockMvc.perform(get(CustomerController.BASE_URL+ "/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", equalTo("Jhon Does2")));
+                .andExpect(jsonPath("$.name", equalTo("Cliente Creado")));
 
     }
 
     @Test
     public void createUser() throws  Exception{
-        User user1 = new User();
-        user1.setName("Usuario Creado");
-        user1.setUserName("JhonDoes2");
-        user1.setEmail("usuario@correo.com");
-        when(userService.createUser(user1)).thenReturn(user1);
+        Customer customer1 = new Customer();
+        customer1.setName("Customer created");
+        customer1.setUserName("JhonDoes2");
+        customer1.setEmail("usuario@correo.com");
+        when(userService.createXustomer(customer1)).thenReturn(customer1);
 
-        mockMvc.perform(post(UserController.BASE_URL)
+        mockMvc.perform(post(CustomerController.BASE_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(user1)))
+                .content(asJsonString(customer1)))
                 .andExpect(status().isCreated());
 
     }
 
     @Test
     public void updateUser() throws Exception {
-        User user1 = new User();
-        user1.setName("Usuario Creado");
-        user1.setUserName("JhonDoes2");
-        user1.setEmail("usuario@correo.com");
+        Customer customer1 = new Customer();
+        customer1.setName("Cliente Creado");
+        customer1.setUserName("JhonDoes2");
+        customer1.setEmail("usuario@correo.com");
 
-        when(userService.updateUser(anyLong(), any(User.class))).thenReturn(user1);
+        when(userService.updateCustomer(anyLong(), any(Customer.class))).thenReturn(customer1);
 
-        mockMvc.perform(put(UserController.BASE_URL +"/1")
+        mockMvc.perform(put(CustomerController.BASE_URL +"/1")
         .contentType(MediaType.APPLICATION_JSON)
-        .content(asJsonString(user1)))
+        .content(asJsonString(customer1)))
         .andExpect(status().isOk());
 
     }
 
     @Test
     public void deleteUser() throws Exception {
-        mockMvc.perform(delete(UserController.BASE_URL +"/1")
+        mockMvc.perform(delete(CustomerController.BASE_URL +"/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 

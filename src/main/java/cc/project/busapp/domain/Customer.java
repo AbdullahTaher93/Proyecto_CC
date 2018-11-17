@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class User {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +23,11 @@ public class User {
     @Email
     private String email;
 
-    public User() {
+    public Customer() {
 
     }
 
-    public User(Long userId, String name, String userName, String email) {
+    public Customer(Long userId, String name, String userName, String email) {
         this.userId = userId;
         this.name = name;
         this.userName = userName;
@@ -68,7 +68,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Customer{" +
                 "userId=" + userId +
                 ", name='" + name + '\'' +
                 ", userName='" + userName + '\'' +

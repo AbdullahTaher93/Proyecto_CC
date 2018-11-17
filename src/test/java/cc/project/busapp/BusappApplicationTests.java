@@ -7,8 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 /*
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BusappApplicationTests {
-
+public class BusappApplicationTests mv
     @Test
     public void contextLoads() {
     }

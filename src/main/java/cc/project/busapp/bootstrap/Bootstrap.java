@@ -1,17 +1,17 @@
 package cc.project.busapp.bootstrap;
 
-import cc.project.busapp.domain.User;
-import cc.project.busapp.repositories.UserRepository;
+import cc.project.busapp.domain.Customer;
+import cc.project.busapp.repositories.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Bootstrap  implements CommandLineRunner {
 
-    private UserRepository userRepository;
+    private CustomerRepository customerRepository;
 
-    public Bootstrap(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public Bootstrap(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
     @Override
@@ -21,17 +21,17 @@ public class Bootstrap  implements CommandLineRunner {
 
     public void loadCustomer (){
 
-        User user1 = new User(1l, "Jhon Doe", "jhonDoe", "jhonDoe@mail.com");
-        User user2 = new User(2l, "Pamela J. Travis", "PamelaJT", "PamelaJTravis@gustr.com");
-        User user3 = new User(3l, "Willie D. Morrison", "WillieD", "WillieDMorrison@superrito.com");
-        User user4 = new User(4l, "Homer F. Martin", "HomerF", "HomerFMartin@superrito.com");
+        Customer customer1 = new Customer(1l, "Jhon Doe", "jhonDoe", "jhonDoe@mail.com");
+        Customer customer2 = new Customer(2l, "Pamela J. Travis", "PamelaJT", "PamelaJTravis@gustr.com");
+        Customer customer3 = new Customer(3l, "Willie D. Morrison", "WillieD", "WillieDMorrison@superrito.com");
+        Customer customer4 = new Customer(4l, "Homer F. Martin", "HomerF", "HomerFMartin@superrito.com");
 
-        userRepository.save(user1);
-        userRepository.save(user2);
-        userRepository.save(user3);
-        userRepository.save(user4);
+        customerRepository.save(customer1);
+        customerRepository.save(customer2);
+        customerRepository.save(customer3);
+        customerRepository.save(customer4);
 
-        System.out.println("**********************Users Loaded****************************"+ userRepository.count());
+        System.out.println("**********************Users Loaded****************************"+ customerRepository.count());
 
 
     }
