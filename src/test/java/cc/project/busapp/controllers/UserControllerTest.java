@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -96,7 +97,7 @@ public class UserControllerTest {
         user1.setUserName("JhonDoes2");
         user1.setEmail("usuario@correo.com");
 
-        when(userService.updateUser(anyLong(), user1)).thenReturn(user1);
+        when(userService.updateUser(anyLong(), any(User.class))).thenReturn(user1);
 
         mockMvc.perform(put(UserController.BASE_URL +"/1")
         .contentType(MediaType.APPLICATION_JSON)

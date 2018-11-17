@@ -16,4 +16,4 @@ Proyecto para la asignatura Cloud Computing.
 
 * [link del proyecto](https://danielbc09.github.io/Proyecto_CC/)
 
-* [Hito 1 Documentación](https://danielbc09.github.io/Proyecto_CC/Documentacion)
+* [Documentación](https://danielbc09.github.io/Proyecto_CC/Documentacion)
