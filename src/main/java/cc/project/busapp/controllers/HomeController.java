@@ -3,7 +3,6 @@ package cc.project.busapp.controllers;
 
 import cc.project.busapp.domain.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

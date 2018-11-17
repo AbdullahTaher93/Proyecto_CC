@@ -2,7 +2,6 @@ package cc.project.busapp.bootstrap;
 
 import cc.project.busapp.domain.User;
 import cc.project.busapp.repositories.UserRepository;
-import cc.project.busapp.repositories.UserRepositoryStub;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

@@ -8,22 +8,17 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.omg.CORBA.Any;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -85,7 +80,6 @@ public class UserControllerTest {
         user1.setName("Usuario Creado");
         user1.setUserName("JhonDoes2");
         user1.setEmail("usuario@correo.com");
-
         when(userService.createUser(user1)).thenReturn(user1);
 
         mockMvc.perform(post(UserController.BASE_URL)
@@ -96,7 +90,19 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUser() {
+    public void updateUser() throws Exception {
+        User user1 = new User();
+        user1.setName("Usuario Creado");
+        user1.setUserName("JhonDoes2");
+        user1.setEmail("usuario@correo.com");
+
+        when(userService.updateUser(anyLong(), user1)).thenReturn(user1);
+
+        mockMvc.perform(put(UserController.BASE_URL +"/1")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(asJsonString(user1)))
+        .andExpect(status().isOk());
+
     }
 
     @Test

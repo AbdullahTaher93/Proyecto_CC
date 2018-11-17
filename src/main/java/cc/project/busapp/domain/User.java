@@ -16,9 +16,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     @NotNull
-    @Size(min=5, message = "El nombre debe ser minimo de 5 caracteres")
+    @Size(min=5, message = "El nombre debe ser minimo de 5 caracteres.")
     private String name;
-    @NotNull(message = "El nombre de usuario es necesario")
+    @NotNull
     private String userName;
     @Email
     private String email;
