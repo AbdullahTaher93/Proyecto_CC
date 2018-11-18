@@ -14,6 +14,8 @@ Proyecto para la asignatura Cloud Computing.
 
 * Jairo Daniel Bautista Castro
 
-* [link del proyecto](https://danielbc09.github.io/Proyecto_CC/)
+* [Página del proyecto](https://danielbc09.github.io/Proyecto_CC/)
 
 * [Documentación](https://danielbc09.github.io/Proyecto_CC/Documentacion)
+
+* Despliegue: https://dashboard.heroku.com/apps/jdbusapp
