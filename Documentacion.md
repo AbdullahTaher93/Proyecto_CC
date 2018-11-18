@@ -54,14 +54,14 @@ Hito 9 - Entrega del MVP (minimum viable product) al cliente. [link](https://git
 
 
 
-#Despliegue
+# Despliegue
 
 Se despliega la aplicación en la nube de Heroku, con la ayuda del version de controles gitHub y la herramienta de integración continua travis CI.
 
 El servicio que se despliega es el de usuarios. El cual se encarga de realizar un CRUD del servicio.
 
 
-#API REST
+# API REST
 
 EL servicio Usuarios tendra los siguientes metodos:
  
