@@ -18,4 +18,4 @@ Proyecto para la asignatura Cloud Computing.
 
 * [Documentación](https://danielbc09.github.io/Proyecto_CC/Documentacion)
 
-* Despliegue: https://jdbusapp.herokuapp.com/
+Despliegue: https://jdbusapp.herokuapp.com/
