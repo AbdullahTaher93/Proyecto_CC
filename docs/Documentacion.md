@@ -9,23 +9,33 @@ presentara para que sea validado y pueda acceder al bus.
 
 # Definición de Arquitectura
 
-El proyecto se desarrollara con una arquitectura distribuida de Microservicios, para ello se escogió el Lenguaje Java y el Framerwork Spring Boot, además se utilizará 
-herramientas de netflix para ayudar a la gestión de los microservicios como Eureka, Ribbon y Zuul.
+El proyecto se desarrollara con una arquitectura distribuida de Microservicios, para ello se escogió el Lenguaje Java y el Framerwork Spring Boot, además se utilizará herramientas de netflix para ayudar a la gestión de los microservicios como Eurek y Zuul.
 
-La aplicación por ahora esta prevista en desplegarse en Heroku, utilizando contenedores Docker y Herramientas para manejar la infraestructura será ansible.
+Eureka es una API de Netflix la cual nos ayuda a realisar el registro y descubrimiento de los microservicios,estos se registran en esta aplicación y luego eureka realiza el balanceo de carga para la comunicación entre los Microservicios registrados.
 
-Para cada microservicio se utilizará el patrón de una base de datos por microservicio. Ya que la aplicación será desplegada en Heroku la base de datos que se escogerá
-es postgreSQL. 
+Zuul nos ayuda a controlar las peticiones externas de nuestros clientes, colocando una capa de seguridad y autenticación, ayuda a monitorizar las peticiones externas y ayuda a realizar el enrutamiento dinámico para nuestro microservicios.
+
+La aplicación se desplegara en diferentes plataformas de servicios Paas como por ejemplo Heroku y azure, la idea es que esta aplicación se pueda desplegar en cualquier nube sin que afecte el rendimiento de la misma. 
+
+Para cada microservicio se utilizará el patrón de una base de datos por microservicio. Ya que la aplicación será desplegada en Heroku la base de datos que se escoger, por ahora se tiene previsto realizar los cuatro microsrvicios en Java ,con el Framerwork Spring Boot.
+
+La base de datos para cada microservicio puede variar, sin embargo está pensado que la aplicación maneje las siguientes bases de datos : PostgresSQL, MySql y MongoDB.abitMQ para el manejo y encolamiento de mensajes.
 
 Los Microserivicios que se proponen para el sistemas son los siguientes:
 
-    - Gestion de usuarios (microservicio encargado de manejar el login y los usuarios de la aplicación).
+    - Gestión de usuarios (microservicio encargado de manejar el login y los usuarios de la aplicación).
     - Procesamiento de pagos (microservicio encargado de gestionar el pago de los tiquetes).
-    - Gestion y validación de tiquetes(Se encargará, de gestionar la compra y validacion de los iquetes).
+    - Gestión y validación de tiquetes(Se encargará, de gestionar la compra y validacion de los iquetes).
     - Rutas y Estaciones (microservicio encargado de mostrar las rutas y estaciones degranada).
     - Servicio para manejo de logs.
 
-El cliente del proyecto sere yo. 
+Imagen Arquitectura:
+
+
+![arquitectura_app](https://user-images.githubusercontent.com/24718808/49256160-6978d680-f42e-11e8-8fbb-59359542db3b.jpg)
+
+
+
 
 # Hitos del proyecto 
 
@@ -52,29 +62,5 @@ Hito 8 - Desarrollo e implementación de los contenedores. [link](https://github
 
 Hito 9 - Entrega del MVP (minimum viable product) al cliente. [link](https://github.com/danielbc09/Proyecto_CC/milestone/10)
 
-
-
-# Despliegue
-
-Se despliega la aplicación en la nube de Heroku, con la ayuda del version de controles gitHub y la herramienta de integración continua travis CI.
-
-El servicio que se despliega es el de usuarios. El cual se encarga de realizar un CRUD del servicio.
-
-
-# API REST
-
-EL servicio Usuarios tendra los siguientes metodos:
- 
-    * GET "/" : Que nos devolvuelve una ruta ejemplo
-    
-    * GET "/user"  : Nos devolvuelve todos los usuarios
-    
-    * GET "/user/{id}" : Nos regresa un usuario basado en el Id.
-    
-    * POST "/user" : Crea un usuario si se envia los parametros correctamente.
-    
-    * PUT "/user/{id}" : Modifica un usuario basado el Id el mismo.
-    
-    * DELETE "/user/{id}": Se elimina un usuario basado en el Id.
     
     
