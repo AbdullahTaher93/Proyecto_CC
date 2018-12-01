@@ -57,16 +57,18 @@ En cuanto a las pruebas funcionales de las API Rest se utiliza la herramienta [P
 
 ## Despliegue
 
+Despliegue: https://jdbusapp.herokuapp.com/
+
 Se despliega la aplicación en la nube de Heroku, con la ayuda del version de controles gitHub y la herramienta de 
 integración continua travis CI.
 
 El servicio que se despliega es el de usuarios. El cual se encarga de realizar un CRUD del servicio.
 
 
-## API REST
+### API REST
 
-El servicio de Usuarios expone las operaciones de gestión de los usuarios de la aplicación , estas funcionalidades son Básicamente un CRUD de usuarios el cual nos permite Crear,
-Obtener,  Actualizar , Y eliminar un usuario. 
+El servicio de Usuarios expone las operaciones de gestión de los usuarios de la aplicación , estas funcionalidades son Básicamente un CRUD de usuarios el cual nos permite Crear,Obtener,  Actualizar , Y eliminar un usuario. 
+
 Los datos son devueltos en formato Json con las diferentes respuesta para el  usuario.
 
  
@@ -82,6 +84,22 @@ Los datos son devueltos en formato Json con las diferentes respuesta para el  us
     
     * DELETE "/user/{id}": Se elimina un usuario basado en el Id.
 
-(Documenteación despliegue)
+### Infraestructura
 
-Despliegue: https://jdbusapp.herokuapp.com/
+Los archivos de configuracion para la infraestructura de la aplicacion en Heroku son los siguentes:
+
+   - [procfile.txt](https://github.com/danielbc09/Proyecto_CC/blob/master/Procfile): En el procfile se encuentra la   configuracion necesaria de Heroku para que pueda Funcionar Spring en java, web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/busapp-0.0.1-SNAPSHOT.jar.
+   
+   - [.travis.yml](https://github.com/danielbc09/Proyecto_CC/blob/master/.travis.yml): En el .travis.yml esta la configuración la cual solamente es instalar java y el jdk8.
+
+###  Travis.
+
+Para travis aparte de configurar el .travis.yml , se tiene que ingresar a la pagina web y conectar la cuenta de travis con la cuenta de github, despues se selecciona el repositorio al cual se quiere
+
+![travis_ci](https://user-images.githubusercontent.com/24718808/49330602-2daa5200-f591-11e8-8f6f-fe11e2fc87c9.png)
+
+   
+   
+   
+
+
