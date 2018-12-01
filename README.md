@@ -1,6 +1,5 @@
-# Proyecto para Cloud Computing
+# BUSAPP
 
-Proyecto para la asignatura Cloud Computing.
 
 ![Status](https://img.shields.io/badge/Status-Documenting-yellow.svg)  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Language](https://img.shields.io/badge/laguage-java-green.svg)](https://www.java.com/)
@@ -8,14 +7,81 @@ Proyecto para la asignatura Cloud Computing.
 [![Build Status](https://travis-ci.org/danielbc09/Proyecto_CC.svg?branch=master)](https://travis-ci.org/danielbc09/Proyecto_CC)
 
 
-
-
-### Presentado por:
+### Autor:
 
 * Jairo Daniel Bautista Castro
 
-* [Página del proyecto](https://danielbc09.github.io/Proyecto_CC/)
+* [Página del proyecto](https://danielbc09.github.io/Proyecto_CC/Documentacion)
 
-* [Documentación](https://danielbc09.github.io/Proyecto_CC/Documentacion)
+## Descripción del Proyecto
+
+El proyecto consiste en realizar una aplicación para realizar pagos de tiquetes de buses desde el móvil, con esto el usuario no tendrá que estar recargando 
+las tarjetas de los buses y los conductores no perderán el tiempo en cada estación recargando tarjetas y devolviendo cambio a los usuarios.
+
+
+## Definición de Arquitectura
+
+El proyecto se desarrollara con una arquitectura distribuida de Microservicios. Estos microservicios se 
+desarrollaran en el lenguaje Java con el Framerwork Spring Boot.
+
+Los Microserivicios que se proponen para el sistemas son los siguientes:
+
+   - Gestion de usuarios (microservicio encargado de manejar el login y los usuarios de la aplicación).
+   - Procesamiento de pagos (microservicio encargado de gestionar el pago de los tiquetes).
+   - Gestion y validación de tiquetes(Se encargará, de gestionar la compra y validacion de los iquetes).
+   - Rutas y Estaciones (microservicio encargado de mostrar las rutas y estaciones degranada).
+   - Servicio para manejo de logs.
+    
+
+## Desarrollo
+
+El proyecto está desarrollado en el lenguaje Java con el Framework Spring Boot , se escoge este framework ya que es fácil crear aplicaciones API Rest y su configuración es 
+relativamente sencilla.Este Framework se enfoca en las buenas prácticas propuestas por en el AOP([Aspect Oriented Programming](https://docs.spring.io/spring/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html)), 
+el cual promueve prácticas de desarrollo con bajo acoplamiento, dividiendo capas como Repositorios, Servicios , y  Modelos de negocio.
+Además de las buenas prácticas que se proponen en este Framework es fácil de configurar con cualquier base de datos , en este caso utilizando Hibernate como ORM 
+se puede configurar el acceso a  la Base de datos [PostgreSQL](https://www.postgresql.org/).
+   
+[mas Información del proyecto:](https://danielbc09.github.io/Proyecto_CC/Documentacion)
+
+
+## Test Aplicación:
+
+Se va a realizar el desarrollo basado en pruebas unitarias, cada método tendrá su test unitario, se espera realizar un cubrimiento de código entre el 75 y 90 por ciento de la 
+aplicación con pruebas unitarias.
+Spring Framework con su manejo de Inyección de dependencias  nos ayuda a desarrollar código que sea fácil de probar. Utilizando el [Framework Junit](https://junit.org/junit5/) 
+para las pruebas unitarias , además de [Mockito](https://site.mockito.org/) para manejar una sintaxis estilo BDD y realizar los Mocks, nos da herramientas para poder crear una 
+aplicación bien probada.
+
+En cuanto a las pruebas funcionales de las API Rest se utiliza la herramienta [PostMan](https://www.getpostman.com/).
+
+
+## Despliegue
+
+Se despliega la aplicación en la nube de Heroku, con la ayuda del version de controles gitHub y la herramienta de 
+integración continua travis CI.
+
+El servicio que se despliega es el de usuarios. El cual se encarga de realizar un CRUD del servicio.
+
+
+## API REST
+
+El servicio de Usuarios expone las operaciones de gestión de los usuarios de la aplicación , estas funcionalidades son Básicamente un CRUD de usuarios el cual nos permite Crear,
+Obtener,  Actualizar , Y eliminar un usuario. 
+Los datos son devueltos en formato Json con las diferentes respuesta para el  usuario.
+
+ 
+    * GET "/" : Que nos devolvuelve una ruta ejemplo
+    
+    * GET "/user"  : Nos devolvuelve todos los usuarios
+    
+    * GET "/user/{id}" : Nos regresa un usuario basado en el Id.
+    
+    * POST "/user" : Crea un usuario si se envia los parametros correctamente.
+    
+    * PUT "/user/{id}" : Modifica un usuario basado el Id el mismo.
+    
+    * DELETE "/user/{id}": Se elimina un usuario basado en el Id.
+
+(Documenteación despliegue)
 
 Despliegue: https://jdbusapp.herokuapp.com/
