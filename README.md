@@ -94,12 +94,33 @@ Los archivos de configuracion para la infraestructura de la aplicacion en Heroku
 
 ###  Travis.
 
-Para travis aparte de configurar el .travis.yml , se tiene que ingresar a la pagina web y conectar la cuenta de travis con la cuenta de github, despues se selecciona el repositorio al cual se quiere
+Para travis aparte de configurar el .travis.yml , se tiene que ingresar a la pagina web y conectar la cuenta de travis con la cuenta de github, despues se selecciona el repositorio al cual se quiere que se hagan los test.
 
 ![travis_ci](https://user-images.githubusercontent.com/24718808/49330602-2daa5200-f591-11e8-8f6f-fe11e2fc87c9.png)
 
-   
-   
-   
+
+La siguiente imagen muestra el build exitoso en travis CI , para mas informaciń ir al siguiente [link](https://travis-ci.org/danielbc09/Proyecto_CC/jobs/462217719).
+
+![travis_ci](https://user-images.githubusercontent.com/24718808/49340508-03b06880-f641-11e8-9414-fec5373f2ce9.png)
 
 
+### Heroku 
+
+En Heroku se configura una instancia de la aplicación mas un add-ons de bases de datos postgreSQL como lo muestra la siguiente imagen:
+
+![heroku_postgress](https://user-images.githubusercontent.com/24718808/49340543-74578500-f641-11e8-83c1-4a3db11da5ee.png)
+
+
+para que la aplicación se pueda conectar a la base de datos , se raliza una configuración en el archivo [aplication.properties del](https://github.com/danielbc09/Proyecto_CC/blob/master/src/main/resources/application.properties) proyecto de las variables de entorno:
+
+![env_variables](https://user-images.githubusercontent.com/24718808/49340565-d7e1b280-f641-11e8-9da5-7ef521f43027.png)
+
+Finalmente para que se realice el despliegue en Heroku se configura en "Deploy" el repositorio el cual se quiere desplegar y se añade la opción que solo se despliegue despues de pasar los test de travis CI.
+
+![heroku_github](https://user-images.githubusercontent.com/24718808/49340603-82f26c00-f642-11e8-8ee9-8813efb33697.png)
+
+
+
+
+
+   
