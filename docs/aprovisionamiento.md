@@ -8,8 +8,7 @@ Se escoge como máquina virtual el sistema  Ubuntu Server 18.04 LTS del tamaño 
 
 Se configura para que estén abiertos los puertos 80 y 22 y que la conexión sea mediante ssh configurando la clave pública.
 
-
-img_1
+![img_1](https://user-images.githubusercontent.com/24718808/49506737-1dd78a00-f87f-11e8-8c3f-22c46490be79.png)
 
 ## Aprovisionamiento con ansible
 
@@ -17,7 +16,7 @@ Se realiza el aprovisionamiento con la herramienta Ansible , la cual se escoge p
 
 Se configura  el documento host para que nos podamos conectar a la máquina virtual. Se ejecuta el comando ansible azure -m ping y nos responde 
 
-img_2
+![img_2](https://user-images.githubusercontent.com/24718808/49506766-2d56d300-f87f-11e8-8d0e-39d194a22487.png)
 
 
 ## Playbook
@@ -136,8 +135,7 @@ ansible-playbook provision.yml -v
 La siguente imagen muestra el resultado de la instalación de la infraestructura en la maquina virtual , como se puede observar 
 el resultado es exitoso para todos los pasos.
 
-
-Img_3
+![img_4](https://user-images.githubusercontent.com/24718808/49506790-3b0c5880-f87f-11e8-945d-810afc7761d9.png)
 
 Para probar que la maquina esté funcionando se ejecuta el comando curl y obtenemos la siguiente respuesta.
 
@@ -147,14 +145,13 @@ curl http://168.62.51.36
 ~~~
 
  
-Es posible acceder al navegador y ver la siguiente imagen.
+Es posible acceder a la [aplicación](http://168.62.51.36) por medio del navegador navegador y ver la siguiente imagen.
 
 ~~~
 http://168.62.51.36/
 ~~~
 
-img_4
- 
+![img_5](https://user-images.githubusercontent.com/24718808/49506787-38a9fe80-f87f-11e8-8041-ccabe47ba3d1.png)
  
  
  
