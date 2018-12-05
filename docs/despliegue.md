@@ -1,7 +1,4 @@
-### Despliegue
-
-
-## Despliegue
+# Despliegue
 
 Despliegue: https://jdbusapp.herokuapp.com/
 
@@ -13,7 +10,7 @@ El servicio que se despliega es el de usuarios. El cual se encarga de realizar u
 
 ### API REST
 
-El servicio de Usuarios expone las operaciones de gestión de los usuarios de la aplicación , estas funcionalidades son Básicamente un CRUD de usuarios el cual nos permite Crear,Obtener,  Actualizar , Y eliminar un usuario. 
+El servicio de Usuarios expone las operaciones de gestión de los usuarios ddae la aplicación , estas funcionalidades son Básicamente un CRUD de usuarios el cual nos permite Crear,Obtener,  Actualizar , Y eliminar un usuario. 
 
 Los datos son devueltos en formato Json con las diferentes respuesta para el  usuario.
 

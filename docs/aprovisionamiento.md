@@ -1,0 +1,131 @@
+# Aprovisionamiento de Máquinas Virtuales 
+
+##Creación Maquina virtual Azure:
+
+En esta fase del proyecto se decide desplegar en [Microsoft Azure](https://azure.microsoft.com) , ya que es una plataforma en la nube más importante que lidera la competencia actual junto con google y amazon web services.
+
+Se escoge como máquina virtual el sistema  Ubuntu Server 18.04 LTS del tamaño Standar D2sv3  la cual tiene espacio suficiente para desplegar nuestra aplicación hecha en el anterior servicio.
+
+Se configura para que estén abiertos los puertos 80 y 22 y que la conexión sea mediante ssh configurando la clave pública.
+
+
+img_1
+
+##Aprovisionamiento con ansible
+
+Se realiza el aprovisionamiento con la herramienta Ansible , la cual se escoge por lo fácil de manejar y su practicidad a la hora de trabajar con los playbooks.
+
+Se configura  el documento host para que nos podamos conectar a la máquina virtual. Se ejecuta el comando ansible azure -m ping y nos responde 
+
+img_2
+
+
+##Playbook
+
+Para la instalación de las herramientas necesarias para desplegar nuestra aplicación es necesario definirlas en un [Playbook](https://docs.ansible.com/ansible/2.5/user_guide/playbooks.html) de ansible el cual es donde se van a realizar todas las tareas de instalación , este playbook está en formato YAML.
+
+la siguientes son las tareas que se realizan en el archivo provision.yml el cual es el que realizará las actividades de aprovisionamiento de la máquina virtual.
+
+~~~
+-  hosts: azure
+   become: yes
+~~~
+ - En hosts , se indica la maquina virtual configurada en el archivo "hosts" de ansible , la cual es la maquina virtual creada.
+ - become se coloca para indicar si es necesario que se ejecute una tarea como root de la maquina.
+ 
+ Luego las tareas son las siguientes :
+ 
+ ~~~
+ - name: Ensure apt cache is up to date
+   apt: update_cache=yes
+ ~~~
+ - En apt update cache , verificamos que el cache este actualizado.
+ 
+~~~
+    - name: Install add-apt-repostory
+      apt: name=software-properties-common state=latest
+~~~
+- en esta tarea se mira que el repositorio software-properties-common este en su ultima version
+
+### Java
+
+En el siguiente snipet de codigo se instala java 8
+~~~
+      - name: Add Oracle Java Repository
+        apt_repository: repo='ppa:webupd8team/java'
+
+      - name: Accept Java 8 License
+        debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+
+      - name: Install Oracle Java 8
+        apt: name={{item}} state=latest
+        with_items:
+          - oracle-java8-installer
+          - ca-certificates
+          - oracle-java8-set-default
+~~~
+- Se añade el repositorio "ppa:webupd8team/java"  de java8
+- En debconf se configura para que instale oracle java 8 y que acepte los terminos de licenciade oracle.
+- Finalmente se instala los paquetes de java 8. 
+
+### Git
+
+Se instala git de la siguiente forma
+~~~
+      - name: Install Git
+        apt:
+          name: git
+          state: present
+~~~
+- el anterior snippet comprueba que esté instalado git, si no esta instalado lo instala.
+
+### Maven
+
+ 
+Se instala maven de la siguiente forma
+~~~
+      - name: Install Maven
+        apt:
+          name: maven
+          state: present
+~~~
+-El anterior snippet comprueba que esté instalado maven, si no esta instalado lo instala. 
+
+ ###ClonarRepositorio
+ 
+ Se clona el repositorio de git hub 
+ ~~~
+- name: Clone Git project
+        git:
+          dest: Documents/CCProject
+          repo: https://github.com/danielbc09/Proyecto_CC.git
+ ~~~
+ ### Cambio de puertos
+ 
+ Para que la aplicación pueda funcionar correctamente, se tiene que direccionar el puerto 80 a el 8080 que es donde SpringBoot se despliega por defecto
+ se despliega (fuente) [https://askubuntu.com/questions/444729/redirect-port-80-to-8080-and-make-it-work-on-local-machine].
+ 
+ ~~~
+       - name: Redirect ports
+           become: true
+           become_method: sudo
+           command: iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
+ ~~~
+
+
+### Instalación de infraestructura Ansible
+ 
+Se ejecuta el playbook con el siguiente comando para que instale toda la infraestructura necesaria para nuestra aplicación:
+
+~~~
+ansible-playbook provision.yml -v
+~~~
+
+La siguente imagen muestra el resultado de la instalación de la infraestructura en la maquina virtual , como se puede observar 
+el resultado es exitoso para todos los pasos.
+
+
+ 
+ 
+ 
+ 
