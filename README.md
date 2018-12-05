@@ -135,9 +135,7 @@ finalmente la maquina responde:
 
 ![despliegue](https://user-images.githubusercontent.com/24718808/49507922-cbe43380-f881-11e8-903a-409346f3693d.png)
 
-La dirección IP: 168.62.51.36
-
-MV: http://168.62.51.36/
+MV: 168.62.51.36
 
 Para mayor información sobre el despliegue [aquí](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/aprovisionamiento.md)
 
@@ -145,4 +143,4 @@ Para mayor información sobre el despliegue [aquí](https://github.com/danielbc0
 
 Se realiza la comprobación de la máquina virtual para el compañero Miguel Gonçalves, el cual esta en el siguiente [enlace](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/prov_%20migueldgoncalves.md)
 
-   
+ Mi compañero Miguel también comprobo mi maquina virtual esta en el siguiente [enlace](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/comprobacion.md)
