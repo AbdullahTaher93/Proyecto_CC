@@ -122,6 +122,25 @@ Finalmente para que se realice el despliegue en Heroku se configura en "Deploy" 
 
 ## Provisionamiento de maquinas virtuales
 
+Se ha creado una maquina virtual en azure Ubuntu Server 18.04 LTS. En el [fichero](https://github.com/danielbc09/Proyecto_CC/blob/master/provision/provision.yml) esta la configuracin necesaria para   
+ esta la configuración necesaria para la instalación de la infraestructura necesaria para nuestra aplicación , asi mismo como el despliegue.
+ 
+
+se ejecuta el comando nsible-playbook -i ansible_hosts -b ansible-playbook provision.yml -v
+
+![instalacion](https://user-images.githubusercontent.com/24718808/49507929-cf77ba80-f881-11e8-85df-bd889e6c9e78.png)
+
+
+finalmente la maquina responde:
+
+![despliegue](https://user-images.githubusercontent.com/24718808/49507922-cbe43380-f881-11e8-903a-409346f3693d.png)
+
+La dirección IP: 168.62.51.36
+
+MV: http://168.62.51.36/
+
+Para mayor información sobre el despliegue [aquí](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/aprovisionamiento.md)
+
 
 
 
