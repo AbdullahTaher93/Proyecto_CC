@@ -143,7 +143,6 @@ Para mayor información sobre el despliegue [aquí](https://github.com/danielbc0
 
 ### Comprobación maquina virtual compañero.
 
-Se realiza la comprobación de la máquina virtual para el compañero Miguel Gonçalves, el cual esta en el siguiente [enlace]
-(https://github.com/danielbc09/Proyecto_CC/blob/master/docs/prov_%20migueldgoncalves.md)
+Se realiza la comprobación de la máquina virtual para el compañero Miguel Gonçalves, el cual esta en el siguiente [enlace](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/prov_%20migueldgoncalves.md)
 
    
