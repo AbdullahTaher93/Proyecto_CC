@@ -141,6 +141,7 @@ MV: http://168.62.51.36/
 
 Para mayor información sobre el despliegue [aquí](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/aprovisionamiento.md)
 
+### Comprobación maquina virtual compañero.
 
 
 
