@@ -1,0 +1,54 @@
+-   hosts: azure
+    become: yes  
+    gather_facts: False
+
+    tasks:
+      - name: Ensure apt cache is up to date
+        apt: update_cache=yes
+
+      - name: Install add-apt-repostory
+        apt: name=software-properties-common state=latest
+
+      - name: Add Oracle Java Repository
+        apt_repository: repo='ppa:webupd8team/java'
+
+      - name: Accept Java 8 License
+        debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+
+      - name: Install Oracle Java 8
+        apt: name={{item}} state=latest
+        with_items:
+          - oracle-java8-installer
+          - ca-certificates
+          - oracle-java8-set-default
+      
+      - name: Install Git
+        apt:
+          name: git
+          state: present
+      
+      - name: Install Maven
+        apt:
+          name: maven
+          state: present
+
+      - name: Clone Git project
+        git:
+          dest: Documents/CCProject
+          repo: https://github.com/danielbc09/Proyecto_CC.git
+        
+      - name: Redirect ports
+        become: true
+        become_method: sudo
+        command: iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
+
+      - name: Install application using Maven
+        shell: mvn clean install
+        args:
+          chdir: Documents/CCProject
+
+      - name: Run application using Maven
+        shell: nohup mvn spring-boot:run &
+        args:
+          chdir: Documents/CCProject
+

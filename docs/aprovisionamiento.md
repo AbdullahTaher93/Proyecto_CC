@@ -1,6 +1,6 @@
 # Aprovisionamiento de Máquinas Virtuales 
 
-##Creación Maquina virtual Azure:
+## Creación Maquina virtual Azure:
 
 En esta fase del proyecto se decide desplegar en [Microsoft Azure](https://azure.microsoft.com) , ya que es una plataforma en la nube más importante que lidera la competencia actual junto con google y amazon web services.
 
@@ -11,7 +11,7 @@ Se configura para que estén abiertos los puertos 80 y 22 y que la conexión sea
 
 img_1
 
-##Aprovisionamiento con ansible
+## Aprovisionamiento con ansible
 
 Se realiza el aprovisionamiento con la herramienta Ansible , la cual se escoge por lo fácil de manejar y su practicidad a la hora de trabajar con los playbooks.
 
@@ -20,7 +20,7 @@ Se configura  el documento host para que nos podamos conectar a la máquina virt
 img_2
 
 
-##Playbook
+## Playbook
 
 Para la instalación de las herramientas necesarias para desplegar nuestra aplicación es necesario definirlas en un [Playbook](https://docs.ansible.com/ansible/2.5/user_guide/playbooks.html) de ansible el cual es donde se van a realizar todas las tareas de instalación , este playbook está en formato YAML.
 
@@ -112,6 +112,18 @@ Se instala maven de la siguiente forma
            command: iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
  ~~~
 
+ ### Despliegue aplicación
+ 
+ Finalmente para desplegar la aplicación en maven se raliza el siguiente comando.
+ 
+  ~~~
+       - name: Run application using Maven
+         shell: nohup mvn spring-boot:run &
+         args:
+           chdir: Documents/CCProject
+  ~~~
+   -Se ejecuta un comando shell que realiza la comprobación de test y elinicio de la aplicación en Springboot, el comando nohup se utiliza 
+   que el proceso con ansible continue y no se quede estancado.
 
 ### Instalación de infraestructura Ansible
  
@@ -125,6 +137,24 @@ La siguente imagen muestra el resultado de la instalación de la infraestructura
 el resultado es exitoso para todos los pasos.
 
 
+Img_3
+
+Para probar que la maquina esté funcionando se ejecuta el comando curl y obtenemos la siguiente respuesta.
+
+~~~
+curl http://168.62.51.36
+{"status":"OK","ejemplo":{"ruta":"/user/1","valor":{"userId":1,"name":"Jhon Doe","userName":"jhonDoe","email":"jhonDoe@mail.com"}}}
+~~~
+
+ 
+Es posible acceder al navegador y ver la siguiente imagen.
+
+~~~
+http://168.62.51.36/
+~~~
+
+img_4
+ 
  
  
  
