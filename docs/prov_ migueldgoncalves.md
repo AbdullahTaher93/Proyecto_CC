@@ -31,13 +31,14 @@ ansible-playbook hito3.yml
 Despues de que se ejecuta la tarea "running application using maven" podemos ver en la dirección http://40.121.164.101/ la 
 siguiente respuesta.
 
-img_respuesta
+![prueba](https://user-images.githubusercontent.com/24718808/49535865-7c275b80-f8c5-11e8-910b-b1729f9689f2.png)
+
 
 
 Luego siguiendo las [instrucciones](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/provisionamiento.md) que estan en el repositorio , 
 tecleamos crt-c para parar el proceso de despliegue y obtenemos la siguiente pantalla.
 
-img_final
+![end_comprobacion](https://user-images.githubusercontent.com/24718808/49535901-9103ef00-f8c5-11e8-81ae-e3dbccd90262.png)
 
 
 
