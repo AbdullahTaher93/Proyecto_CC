@@ -31,7 +31,7 @@ Los datos son devueltos en formato Json con las diferentes respuesta para el  us
 
 Los archivos de configuracion para la infraestructura de la aplicacion en Heroku son los siguentes:
 
-   - [procfile.txt](https://github.com/danielbc09/Proyecto_CC/blob/master/Procfile): En el procfile se encuentra la   configuracion necesaria de Heroku para que pueda Funcionar Spring en java, web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/busapp-0.0.1-SNAPSHOT.jar.
+   - [Procfile](https://github.com/danielbc09/Proyecto_CC/blob/master/Procfile): En el procfile se encuentra la   configuracion necesaria de Heroku para que pueda Funcionar Spring en java, web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/busapp-0.0.1-SNAPSHOT.jar.
    
    - [.travis.yml](https://github.com/danielbc09/Proyecto_CC/blob/master/.travis.yml): En el .travis.yml esta la configuración la cual solamente es instalar java y el jdk8.
 
@@ -58,7 +58,7 @@ para que la aplicación se pueda conectar a la base de datos , se raliza una con
 
 ![env_variables](https://user-images.githubusercontent.com/24718808/49340565-d7e1b280-f641-11e8-9da5-7ef521f43027.png)
 
-Finalmente para que se realice el despliegue en Heroku se configura en "Deploy" el repositorio el cual se quiere desplegar y se añade la opción que solo se despliegue despues de pasar los test de travis CI.
+Finalmente para que se pueda desplegar en Heroku se configura en "Deploy" el repositorio el cual se quiere desplegar y se añade la opción que solo se despliegue despues de pasar los test de travis CI.
 
 ![heroku_github](https://user-images.githubusercontent.com/24718808/49340603-82f26c00-f642-11e8-8ee9-8813efb33697.png)
 

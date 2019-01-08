@@ -5,7 +5,8 @@
 En esta fase del proyecto se decide desplegar en [Microsoft Azure](https://azure.microsoft.com) , ya que es una plataforma en la nube más importante que lidera la competencia actual junto con google y amazon web services.
 
 Se escoge como máquina virtual el sistema  Ubuntu Server 18.04 LTS del tamaño Standar D2sv3  la cual tiene espacio suficiente para desplegar nuestra aplicación hecha en el anterior servicio.
-
+Se ha creado una maquina virtual en azure Ubuntu Server 18.04 LTS. En el [fichero](https://github.com/danielbc09/Proyecto_CC/blob/master/provision/provision.yml) esta la configuracin necesaria para   
+ esta la configuración necesaria para la instalación de la infraestructura necesaria para nuestra aplicación , asi mismo como el despliegue.
 Se configura para que estén abiertos los puertos 80 y 22 y que la conexión sea mediante ssh configurando la clave pública.
 
 ![img_1](https://user-images.githubusercontent.com/24718808/49506737-1dd78a00-f87f-11e8-8c3f-22c46490be79.png)
@@ -154,5 +155,10 @@ http://168.62.51.36/
 ![img_5](https://user-images.githubusercontent.com/24718808/49506787-38a9fe80-f87f-11e8-8041-ccabe47ba3d1.png)
  
  
- 
+### Comprobación maquina virtual compañero.
+
+Se realiza la comprobación de la máquina virtual para el compañero Miguel Gonçalves, el cual esta en el siguiente [enlace](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/prov_%20migueldgoncalves.md)
+
+ Mi compañero Miguel también comprobo mi maquina virtual esta en el siguiente [enlace](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/comprobacion.md)
+
  

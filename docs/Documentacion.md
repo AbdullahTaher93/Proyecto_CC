@@ -35,7 +35,24 @@ Imagen Arquitectura:
 ![arquitectura_app](https://user-images.githubusercontent.com/24718808/49256160-6978d680-f42e-11e8-8fbb-59359542db3b.jpg)
 
 
+## Desarrollo
 
+El proyecto está desarrollado en el lenguaje Java con el Framework Spring Boot , se escoge este framework ya que es fácil crear aplicaciones API Rest y su configuración es 
+relativamente sencilla.Este Framework se enfoca en las buenas prácticas propuestas por en el AOP([Aspect Oriented Programming](https://docs.spring.io/spring/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html)), 
+el cual promueve prácticas de desarrollo con bajo acoplamiento, dividiendo capas como Repositorios, Servicios , y  Modelos de negocio.
+Además de las buenas prácticas que se proponen en este Framework es fácil de configurar con cualquier base de datos , en este caso utilizando Hibernate como ORM 
+se puede configurar el acceso a  la Base de datos [PostgreSQL](https://www.postgresql.org/).
+
+
+## Test Aplicación:
+
+Se va a realizar el desarrollo basado en pruebas unitarias, cada método tendrá su test unitario, se espera realizar un cubrimiento de código entre el 75 y 90 por ciento de la 
+aplicación con pruebas unitarias.
+Spring Framework con su manejo de Inyección de dependencias  nos ayuda a desarrollar código que sea fácil de probar. Utilizando el [Framework Junit](https://junit.org/junit5/) 
+para las pruebas unitarias , además de [Mockito](https://site.mockito.org/) para manejar una sintaxis estilo BDD y realizar los Mocks, nos da herramientas para poder crear una 
+aplicación bien probada.
+
+En cuanto a las pruebas funcionales de las API Rest se utiliza la herramienta [PostMan](https://www.getpostman.com/).
 
 # Hitos del proyecto 
 
