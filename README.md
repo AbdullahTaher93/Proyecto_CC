@@ -67,3 +67,12 @@ Para el aprovisionamiento de la Maquina Virtual se ha usado Ansible. Mediante el
 MV: 168.62.51.36
 
 Para mayor información sobre el la maquina virtual en azure [aquí](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/aprovisionamiento.md)
+
+## Automatización
+
+MV2: 20.188.32.177
+
+Se crea el script de "acopio.sh" con el objetivo de automatizar la creación de una maquina virtual desde la consolo de clientes de la plataforma PaaS azure.
+
+Para mas información sobre por favor dirjase al siguiente [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/automatizacion.md)
+
