@@ -11,6 +11,27 @@ Para instalar el cliente de azure se utiliza el siguiente comando:
 
 ## Elección Maquina Virtual
 
+Para el desarrollo de aplicaciones Java existen diferentes servidores sencillos para utilizar como por ejemplo [JBoss](http://www.jboss.org/) , [GlassFish](https://javaee.github.io/glassfish/), [TomCat](http://tomcat.apache.org/)  u otros más especializados como Weblogic, o websphere de IBM. Se investigó cuáles eran los servidores mas populares o mas usados para el desarrollo y de la siguiente página [web](https://plumbr.io/blog/java/most-popular-java-application-servers-2017-edition) se puede ver la siguiente imagen.
+
+![servidores_usados](https://user-images.githubusercontent.com/24718808/51416114-65d51680-1b78-11e9-88f3-03c27d502d20.png)
+ 
+Se puede ver en la siguiente tabla los servidores y el porcentaje de mercado que tienen:
+
+				| Servidor      | % Mercado |
+				| ------------- | ----------|
+				| TomCat        | 63.8 %    |
+				| JBoss/WildFly | 13.8 %    |
+				| Jetty 	|  9.0 %    |       
+				| Glassfish	|  5.6 %    |
+				| Weblogic 	|  4.5 %    | 
+				| Other 	|  3.4 %    | 
+
+Como se ve el mercado está dominado por apache TomCat , esto se debe a su facilidad de uso , sus prestaciones además que los nuevos Frameworks como Spring Boot, Jersey o Javalin y las de arquitecturas modulares (Microservicios) se prefieren varios servidores simples de una aplicación en vez de un servidor robusto y costoso.
+
+El proyecto como se ha mencionado anteriormente se va a utilizar el framework Spring-boot , el cual ya tiene por defecto embebido el servidor TomCat. además que se recomienda en el desarrollo Web utilizar este framework por defecto, como se puede apreciar en el siguiente [Link](https://stackify.com/tomcat-vs-jetty-vs-glassfish-vs-wildfly/).
+
+
+
 Antes de crear la máquina virtual se escoge la imagen adecuada del sistema operativo que mejor se ajuste a nuestras necesidades
 y además del presupuesto que se tiene en azure para la nube.
 
@@ -19,7 +40,7 @@ Como pue de verse en las recomendaciones de [aquí](https://stackoverflow.com/qu
 
 Se utiliza la Imagen Ubuntu Server 18.04 LTS ya que es una Long Term Support lo que le da el estatus de estabilidad y soporte 
 , además es la última versión de Ubuntu Server en azure y tiene actualizaciones en cuanto a seguridad y optimización del 
-sistema operativo , se puede consultar el siguiente link para más información sobre la versión 18.04(https://wiki.ubuntu.com/BionicBeaver/ReleaseNotes).
+sistema operativo , se puede consultar el siguiente link para más información sobre la versión [18.04](https://wiki.ubuntu.com/BionicBeaver/ReleaseNotes).
 
 En cuanto a recursos se selecciona un básico A1 ya que en el tiempo que estoy haciendo esto solo se tiene una licencia disponible 
 de 21 dólares donada por un compañero , pues las anteriores se gastaron por no tener cuidado al apagar la máquina virtual. 
