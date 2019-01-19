@@ -15,41 +15,41 @@ public class CustomerController {
 
     public static final String BASE_URL = "/user";
 
-    private final CustomerService userService;
+    private final CustomerService customerService;
 
-    public CustomerController(CustomerService userService) {
-        this.userService = userService;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Customer> getAllCustomers() {
-        return userService.getAllCustomers();
+        return customerService.getAllCustomers();
     }
 
     @GetMapping("/{id}")
     public Customer getUserById(@PathVariable long id) {
-        return userService.getCustomerById(id);
+        return customerService.getCustomerById(id);
 
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Customer createUser(@RequestBody @Valid Customer customer) {
-        return userService.createXustomer(customer);
+        return customerService.createXustomer(customer);
     }
 
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public Customer updateUser(@Valid @PathVariable long id, @RequestBody Customer customer) {
-        return userService.updateCustomer(id, customer);
+        return customerService.updateCustomer(id, customer);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteUser(@PathVariable long id) {
-        userService.delete(id);
+        customerService.delete(id);
     }
 }

@@ -1,6 +1,7 @@
 package cc.project.busapp.services;
 
 import cc.project.busapp.domain.Customer;
+import cc.project.busapp.errors.ResourceNotFoundException;
 import cc.project.busapp.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerById(long id) {
-        return customerRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        return customerRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("User with id :" + id + " not Found"));
     }
 
 
