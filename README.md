@@ -70,9 +70,14 @@ Para mayor información sobre el la maquina virtual en azure [aquí](https://git
 
 ## Automatización
 
-MV2: 20.188.32.177
+MV2: 20.188.38.50
 
 Se crea el script de "acopio.sh" con el objetivo de automatizar la creación de una maquina virtual desde la consolo de clientes de la plataforma PaaS azure.
 
 Para mas información sobre por favor dirjase al siguiente [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/automatizacion.md)
+
+## Avances Hito 4
+
+Para mirar los avances del Hito 4 por favor diríjase a este [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/avances_h4.md)
+
 
