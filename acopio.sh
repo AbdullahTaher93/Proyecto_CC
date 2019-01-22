@@ -14,9 +14,6 @@ az group create --name ccdaniel --location francecentral
 echo "Creando maquina virtual"
 ip=$(az vm create --resource-group ccdaniel --name usermicroservice --image Canonical:UbuntuServer:18.04-LTS:latest --generate-ssh-keys --size Basic_A0 --public-ip-address-allocation static | jq -r '.publicIpAddress')
 
-#imprimir la ip
-echo "La Ip es: "
-echo $ip
 
 #abrir el puerto 80
 echo "Abriendo puerto 80"
