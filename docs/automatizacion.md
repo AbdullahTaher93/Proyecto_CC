@@ -1,4 +1,4 @@
-# Automatización Dezpliegue en la nube
+# Automatización Despliegue en la nube
 
 Para esta entrega se utiliza el cliente de azure para crear la máquina virtual del servicio que 
 se va a desplegar.
@@ -59,6 +59,30 @@ base en nuestra conexión de internet.
 En la imagen anterior se muestra que la región de Francia Central presenta mucha menos latencia que el oeste o sur de Reino 
 unido. Lo cual nos da un indicio de la región adecuada para crear la máquina virtual.
 
+
+## Selección Base de datos 
+
+### Motor
+
+La base de datos seleccionada para este se servicio es postgresql, las características que diferencian esta base de datos sobre otras son
+
+-Soporte ACID completo , para saber que es acid  siguiente [link](https://es.wikipedia.org/wiki/ACID).
+
+-Licenciamiento MIT , el cual nos permite hacer muchas cosas con esta base de datos  ya sea comerciales o no.
+
+-Porque en el despliegue con Heroku la única Base de datos gratis fue PostgreSql.
+
+
+### Características Físicas
+
+Para esta base de datos se escogio las siguientes caracteristicas fisicas:
+
+![costos_bd](https://user-images.githubusercontent.com/24718808/51557146-6291a180-1e7c-11e9-8d8f-533db87b2cd9.png)
+
+
+Esto se debe principalmente a los factores,  como el uso que se le va a dar ya que es un microservicio simple que nos guarda los usuarios y el otro factor es el precio, pues esta base de datos es la mas economica que se encontró.
+
+
 ## Creación de Scripts y automatización.
 
 Primero se inicia sesión en la aplicación con el siguiente comando.
@@ -67,49 +91,112 @@ Primero se inicia sesión en la aplicación con el siguiente comando.
 $ az login
 ~~~ 
 
-Se realiza la creación del grupo con la localización de Francia central ya que es la region con menos latencia basados en las
-pruebas anteriores.
+Se realiza la creación del grupo con la localización de Francia central ya que es la region con menos latencia basados en las pruebas anteriores.
 
 ~~~
-$ az group create --name hito4 --location francecentral
+az group create --name ccdaniel --location francecentra
 ~~~
 
-Se crea la imagen virtual  con el siguiente comando.
+Se crea la imagen virtual  con el siguiente comando el cual asocia la imagen creada a una ip , esto se necesitará para más adelante en la creación de la Base de datos en este mismo script.
 
 ~~~
-$ az vm create --resource-group {nombre del recurso} --name userservice --image {imagen seleccionada } --generate-ssh-keys --size {el tamaño de la máquina virtual}
+ip=$(az vm create --resource-group ccdaniel --name usermicroservice --image Canonical:UbuntuServer:18.04-LTS:latest --generate-ssh-keys --size Basic_A0 --public-ip-address-allocation static | jq -r '.publicIpAddress')
 ~~~
 
-Finalmente se abre el puerto 80 para poder acceder a el desde internet:
+
+Se abre el puerto 80 para poder acceder al servidor desde internet:
 
 ~~~
-az vm open-port --resource-group {mi recurso} --name {nombre de la imagen} --port 80
+az vm open-port --resource-group ccdaniel --name usermicroservice --port 80
 ~~~
 
-Con los comandos anteriores se puede ejecutar el  playbook “provision.yml” el cual instala  la infraestructura que necesaria para 
-que nuestra aplicación se pueda instalar y ejecutar.
 
-Los comandos anteriores se automatizan creando el script[acopio.sh](https://github.com/danielbc09/Proyecto_CC/blob/master/acopio.sh), 
-el cual se utiliza para crear la máquina virtual automáticamente.
+Se crea la base de datos PostgreSql con los requerimientos fisicos de la base de datos estan definidos  la parte --sku-name  con el parametro “B_Gen5_1” el cual cada letra significa ,  B Categoría Básica, Gen5 generación de computo   y 1 (Los cores ) para más información siga el siguiente enlace de la documentación [azure](https://docs.microsoft.com/en-us/azure/postgresql/quickstart-create-server-database-azure-cli)
 
-Luego de ejecutar el script "acopio.sh" , nos deberia aparecer una imagen como la siguiente en la consola local.
+El usuario y la contraseña son variables de entorno del sistema , para evitar mostrar las credenciales.
 
-![imgenacoplo](https://user-images.githubusercontent.com/24718808/51096773-5ee88580-17bf-11e9-8b09-73de1ac10d65.png)
+~~~
+az postgres server create --resource-group ccdaniel --name postgrescc --location francecentral --admin-user $database_user --admin-password $database_pass --sku-name B_Gen5_1 --version 9.6
+~~~
 
-Se muestra la siguiente  imagen con el proposito de evidenciar la creación, de la maquina virtual de una forma mas clara.
+Finalmente se añade la regla de firewall para conectarse a la BD  la cual solo permitirá conectar máquinas con la dirección ip especificada o el rango de direcciones ip especificado.
+~~~
+az postgres server firewall-rule create --resource-group ccdaniel --server postgrescc --name AllowMyIP --start-ip-address $ip --end-ip-address $ip
+~~~
+
+## Automatización
+
+Los comandos anteriores se automatizan creando el script[acopio.sh](https://github.com/danielbc09/Proyecto_CC/blob/master/acopio.sh), el cual se utiliza para crear las máquinas virtual automáticamente.
+
+Se muestra las siguientes  imágenes con el propósito de evidenciar la creación, del servidor y la base de datos:
+
+Base de datos:
 
 
-![imagen_vm_creada](https://user-images.githubusercontent.com/24718808/51096406-a28dc000-17bc-11e9-8942-e1d5a45bd936.png)
+![imagen_db](https://user-images.githubusercontent.com/24718808/51557393-14c96900-1e7d-11e9-88e1-a0e27cd13d5a.png)
 
 
-Con la máquina creada se procede a ejecutar con ansible la infraestructura que el servicio necesita.
+
+Servidor Ubuntu:
+
+![imagen_servidor_1](https://user-images.githubusercontent.com/24718808/51557400-198e1d00-1e7d-11e9-8784-a59726f4fc56.png)
+
+
+
+## Despliegue
+
+### Base de datos  
+
+Ya creada nuestro servidor de base de datos , es necesario ingresar con las credenciales que se colocaron a la hora de la creación con el siguiente comando.
+
+~~~
+psql --host=postgrescc.postgres.database.azure.com --port=5432 --username=daniel@postgrescc --dbname=postgres
+~~~
+
+ Después se crea el usuario y la base de datos con el objetivo que nuestra aplicación tenga las credenciales necesarias para poderse conectar. en la siguiente imagen se muestra el proceso finalzado siguiendo las instrucciones del siguiente [tutorial](https://docs.microsoft.com/en-us/azure/postgresql/howto-create-users)
+
+
+### Servidor 
+
+Despues de creado el servidor se puede ejecutar el  playbook “provision.yml” el cual instala  la infraestructura que necesaria para que nuestra aplicación se pueda instalar y ejecutar como se vio en el [hito 3](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/aprovisionamiento.md).
 
 ![ansible_instalacion](https://user-images.githubusercontent.com/24718808/51096798-9a834f80-17bf-11e9-94fc-5b0874640be6.png)
 
+Se ingresa  a la máquina creada por medio de la consola y se configura las variables de entorno, para que el framework sepa a qué dirección y base de datos conectarse
 
-Finalmente se instala la aplicación y se prueba el servicio como muestra la siguiente imagen.
+~~~
+JDBC_DATABASE_URL=direccion bd
+JDBC_DATABASE_USERNAME=ususario@basededatos
+JDBC_DATABASE_PASSWORD=clave cualquiera
+~~~
 
-![prueba_final](https://user-images.githubusercontent.com/24718808/51096843-f352e800-17bf-11e9-97c1-45b3f9dfecba.png)
+
+Finalmente se ejecuta mvn para instalar nuestro microservicio para luego que se conecte a nuestra base de datos de postgres.
+
+~~~
+mvn spring-boot:run 
+~~~
+
+Se realiza una prueba a el Home de la aplicación y nos muestra el resultado de OK
+
+![home_2](https://user-images.githubusercontent.com/24718808/51557699-ebf5a380-1e7d-11e9-9450-657680e3bcf7.png)
+
+Además para comprobar que la conexión entre base de datos y servidor fue exitosa se muestra la siguiente imagen con los usuarios que la aplicación genera en las tablas.
+
+Selección de Base de datos:
+
+![prueba_conexion_1](https://user-images.githubusercontent.com/24718808/51557973-9cfc3e00-1e7e-11e9-9b45-10a201c4c676.png)
+
+
+Se hace un query a la Tabla usuarios donde se puede ver que han sido creados los usuarios que aparecen en la dirección "/user/"
+
+![prueba_db_2](https://user-images.githubusercontent.com/24718808/51558061-ccab4600-1e7e-11e9-9ff2-fe89182c19b3.png)
+
+
+
+
+
+
 
 
 
