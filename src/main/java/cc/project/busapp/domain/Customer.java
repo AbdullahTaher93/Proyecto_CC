@@ -1,79 +1,87 @@
 package cc.project.busapp.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+
+import static java.util.stream.Collectors.toList;
 
 @Entity
-public class Customer {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Customer implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
+
     @NotNull
     @Size(min=5, message = "El nombre debe ser minimo de 5 caracteres.")
     private String name;
+
     @NotNull
     private String userName;
+
     @Email
     private String email;
 
-    public Customer() {
+    @NotNull
+    @JsonIgnore
+    private String password;
 
-    }
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<String> roles = new ArrayList<>();
 
-    public Customer(Long userId, String name, String userName, String email) {
-        this.userId = userId;
-        this.name = name;
-        this.userName = userName;
-        this.email = email;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(toList());
     }
 
     @Override
-    public String toString() {
-        return "Customer{" +
-                "userId=" + userId +
-                ", name='" + name + '\'' +
-                ", userName='" + userName + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String getUsername() {
+        return this.userName;
     }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isEnabled() {
+        return true;
+    }
+
+
 }
 

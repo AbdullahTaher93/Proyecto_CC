@@ -13,7 +13,7 @@ public class CustomerRepositoryStub {
 
     private static Map<Long, Customer> users = new HashMap<Long, Customer>();
     private static Long userIndex = 4l;
-
+/*
     static {
         Customer customer1 = new Customer(1l, "Jhon Doe", "jhonDoe", "jhonDoe@mail.com");
         Customer customer2 = new Customer(2l, "Pamela J. Travis", "PamelaJT", "PamelaJTravis@gustr.com");
@@ -27,6 +27,7 @@ public class CustomerRepositoryStub {
 
     }
 
+*/
     public List<Customer> getAll() {
         return new ArrayList<Customer>(users.values());
     }

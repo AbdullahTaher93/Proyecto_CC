@@ -3,12 +3,15 @@ package cc.project.busapp.services;
 import cc.project.busapp.domain.Customer;
 import cc.project.busapp.errors.ResourceNotFoundException;
 import cc.project.busapp.repositories.CustomerRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CustomerServiceImpl implements CustomerService {
+public class CustomerServiceImpl implements CustomerService, UserDetailsService {
 
 
     private CustomerRepository customerRepository;
@@ -24,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerById(long id) {
-        return customerRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("User with id :" + id + " not Found"));
+        return customerRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Usuario con id :" + id + " encontrado"));
     }
 
 
@@ -49,4 +52,14 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.delete(findCustomer);
     }
 
+    @Override
+    public Customer getCustomerByName(String username) {
+        return this.customerRepository.findByUserName(username).orElseThrow(() -> new ResourceNotFoundException("Usuario con nombre :" + username + " encontrado"));
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return this.customerRepository.findByUserName(username).orElseThrow(() -> new ResourceNotFoundException("Usuario con nombre :" + username + " not encontrado"));
+    }
 }

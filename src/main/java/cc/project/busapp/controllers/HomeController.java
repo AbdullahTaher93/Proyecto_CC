@@ -13,6 +13,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Map;
 
 
@@ -23,7 +24,15 @@ public class HomeController {
     @Autowired
     public ObjectMapper mapper;
 
-    Customer customer1 = new Customer(1l, "Jhon Doe", "jhonDoe", "jhonDoe@mail.com");
+
+    Customer customer1 = Customer.builder()
+            .userId(1l)
+            .name("Jhon Doe")
+            .userName("admin")
+            .email("admin@admin.com")
+            .password("1234")
+            .roles(Arrays.asList("ROLE_USER", "ROLE_ADMIN"))
+            .build();
 
     @GetMapping("/")
     public ObjectNode hello(){
