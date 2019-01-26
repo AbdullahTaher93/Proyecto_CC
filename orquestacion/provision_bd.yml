@@ -1,0 +1,51 @@
+ -  hosts: all
+    become: yes
+    tasks:
+      - name: Ensure apt cache is up to date
+        apt: update_cache=yes
+
+      - name: Install postgresSql
+        apt: name={{item}}
+        with_items:
+          - postgresql
+          - libpq-dev
+          - python-psycopg2
+
+ -  hosts: all
+    become: yes
+    become_user: postgres
+    gather_facts: no
+
+    vars:
+      dbname: ccproject
+      dbuser: "{{lookup('env','AZ_DATABASE_USERADMIN')}}"
+      dbpassword: "{{lookup('env','AZ_DATABASE_PASSWORD')}}"
+
+    tasks:
+      - name: assure database creation
+        postgresql_db: name={{dbname}}
+
+      - name: assure user has the acces to database
+        postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL
+
+      - name: postgresql listen all ports
+        lineinfile: dest=/etc/postgresql/10/main/postgresql.conf
+                  regexp="^listen_addresses"
+                  line="listen_addresses = '*'" state=present
+      
+      - name: postgresql should allow access to host
+        copy:
+          dest: /etc/postgresql/10/main/pg_hba.conf
+          content: |
+            local   all   postgres   peer
+            local   all   all        peer
+            host    all   all        0.0.0.0/0   md5
+      
+      - name: Stop postgreSql
+        become: true  
+        become_method: sudo
+        service:
+          name: postgresql
+          state: restart      
+
+        
