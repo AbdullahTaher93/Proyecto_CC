@@ -76,8 +76,15 @@ Se crea el script de "acopio.sh" con el objetivo de automatizar la creación de 
 
 Para mas información sobre por favor dirjase al siguiente [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/automatizacion.md)
 
-## Avances Hito 4
+## Orquestación Con Vagrant
 
-Para mirar los avances del Hito 4 por favor diríjase a este [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/avances_h4.md)
+Despliegue Vagrant: 40.89.154.93
 
 
+Para mas información para el despliegue con vagrant por favor dirijase a este [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_orquestacion.md)
+
+Se ha comprobado la orquestación de EL compañero Miguel gonCalves en el [siguiente documento](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_comprobacion.md)
+
+El compañero Miguel ha comprobado mi orquestación , para más información dirigirse a el siguiente [link](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_2.md)
+
+Los avances del Hito 5 estan en el siguiente [documento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/5_avances.md)

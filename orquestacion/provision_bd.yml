@@ -46,6 +46,6 @@
         become_method: sudo
         service:
           name: postgresql
-          state: restart      
+          state: restarted     
 
         
