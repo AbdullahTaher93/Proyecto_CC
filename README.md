@@ -87,4 +87,4 @@ Se ha comprobado la orquestación de EL compañero Miguel gonCalves en el [sigui
 
 El compañero Miguel ha comprobado mi orquestación , para más información dirigirse a el siguiente [link](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_2.md)
 
-Los avances del Hito 5 estan en el siguiente [documento](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/5_avances.md)
+Los avances del Hito 5 estan en el siguiente [documento](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_avances.md)
