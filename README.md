@@ -93,7 +93,7 @@ Los avances del Hito 5 estan en el siguiente [documento](https://github.com/dani
 ## Contenedores 
 
 
-Contenedor: http://20.188.37.138/
+Contenedor: http://20.188.37.138
 
 DockerHub: https://cloud.docker.com/repository/docker/danielbc/userservice
 
