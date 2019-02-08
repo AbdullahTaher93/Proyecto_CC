@@ -88,3 +88,16 @@ Se ha comprobado la orquestación de EL compañero Miguel gonCalves en el [sigui
 El compañero Miguel ha comprobado mi orquestación , para más información dirigirse a el siguiente [link](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_2.md)
 
 Los avances del Hito 5 estan en el siguiente [documento](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_avances.md)
+
+
+## Contenedores 
+
+
+Contenedor: http://20.188.37.138/
+
+DockerHub: https://cloud.docker.com/repository/docker/danielbc/userservice
+
+Para este hito se utilizo la herramienta docker para la creación de nuestro contenedor en el cual se ejecuta el microservicio de usuario, ademas  con ayuda de docker-compose se realiza una orquestación con otro contenedor con una base de datos postgresql.
+
+La documentación del proceso se encuentra en el siguiente [enlace](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/6_contenedores.md)
+
