@@ -49,4 +49,18 @@ public class HomeController {
         return objectNode;
     }
 
+
+    @GetMapping("/status")
+    @ResponseStatus(HttpStatus.OK)
+    public ObjectNode status(){
+
+        ObjectNode node2 = mapper.createObjectNode();
+        node2.put("ruta", "/user/1");
+        node2.putPOJO("valor", customer1);
+        ObjectNode objectNode = mapper.createObjectNode();
+        objectNode.put("status", "OK");
+        objectNode.put("ejemplo", node2);
+        return objectNode;
+    }
+
 }
