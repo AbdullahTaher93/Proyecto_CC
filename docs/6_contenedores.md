@@ -1,19 +1,18 @@
 # Despliegue con contenedores 
 
-Para este hito se realizará el despliegue de la aplicación con contenedores, lo cuales se han convertido en un herramienta extra para poder desplegar rápidamente aplicaciones y evitar lo problemas de “en mi computador funciona”  los cuales son muy frecuentes en nuestra rama de ingeniería.
+Para este hito se realizará el despliegue de la aplicación con contenedores, los cuales se han convertido en un herramienta para poder desplegar rápidamente aplicaciones y evitar lo problemas de “en mi computador funciona”  los cuales son muy frecuentes en nuestra rama de ingeniería.
 
-Los contenedores son básicamente  es una formas de encapsular las dependencias necesarias  de una aplicación por ejemplo un sistema operativo, o una herramienta como java python o node , con el fin que la aplicación pueda ejecutarse de una forma independiente  del sistema operativo en el cual se despliega.
+Los contenedores son básicamente una formas de encapsular las dependencias necesarias  de una aplicación, por ejemplo un sistema operativo o una herramienta como java, python o node con el fin que la aplicación pueda ejecutarse de una forma independiente del sistema operativo en el cual se despliega.
 
-Si bien los contenedore no son una idea nueva , desde el 2012 se ha visto una adopción a lo largo de la industria de software , esto debido a las ventajas que ofrecen sobre otras métodos como despliegue en un servidor físico o en máquinas virtuales.
+Si bien los contenedore no son una idea nueva, desde el 2012 se ha visto una adopción a lo largo de la industria de software , esto debido a las ventajas que ofrecen sobre otras métodos como despliegue en un servidor físico o en máquinas virtuales.
 
 ### Ventajas de los contenedores son
 
-- Despliegue  en un entorno repetible, es decir que el contenedor siempre va a ser el mismo , evitando que los desarrolles pasen menos tiempo depurando y configurando los entornos donde se  despliega una aplicación.
+- Despliegue  en un entorno repetible, es decir que el contenedor siempre va a ser el mismo evitando que los desarrolles pasen menos tiempo depurando y configurando los entornos donde se  despliega una aplicación.
 
-- Ejecución en cualquier lugar, ya sea un sistema operativo windows, linux o Mac. ya que son procesos independientes de donde se desplieguen.
+- Ejecución en cualquier lugar, ya sea un sistema operativo windows, linux o Mac. pues los contenedores se ejcutan como procesos independientes sin importar donde se desplieguen.
 
-- A diferencia de las máquinas virtuales que se necesita instalar el sistema operativo completo , un contenedor solo necesita instalar las dependencias básicas para ejecutar una aplicación. 
-imagen de 
+- A diferencia de las máquinas virtuales las cuales necesitan de la instalación del sistema operativo completo , un contenedor solo necesita instalar las dependencias básicas para ejecutar una aplicación. 
 
     ![contenedoresvsmq](https://user-images.githubusercontent.com/24718808/52476691-b51ecd80-2b9f-11e9-8faa-620d0b3cf88f.png)
 
@@ -29,14 +28,14 @@ Para saber más sobre contenedores y sus aplicaciones puede ver este [video](htt
 
 ## Docker 
 
-[Docker](https://www.docker.com/) es una herramienta para el manejo de contenedores , es una de las herramientas más usadas para el manejo de contenedores y existe la versión empresarial como libre.
+[Docker](https://www.docker.com/) es una herramienta para el manejo de contenedores que se ha convertido en una de las más usadas para el manejo de contenedores, empezando como software libre sin embargo hoy existe una versión empresaria.
 
 Después de seguir las instrucciones de instalación de la documentación oficial ,se puede comprobar que docker está instalado en la máquina ejecutando el comando `docker`. 
 
 
 ## Creando Contenedores 
 
-Para este hito se utiliza docker como herramienta para crear contenedores de nuestro microservicio de usuarios  además se utiliza un contenedor de postgreSql para la base de datos y se orquestan con docker-compose. 
+En este hito se utiliza docker como herramienta para la creación de nuestro microservicio de usuarios  y  ademas de usar un contenedor de postgreSql para la base de datos, finalmente  se orquestan ambos contenedores con docker-compose. 
 
 ## Contenedor del sevicio usuario
 
@@ -44,9 +43,9 @@ Cada contenedor se crea como si fuera una lasaña  es decir por capas , la capa 
 
 ### DockeFile
 
-Para crear el contenedor es necesario crear primero el archivo [DockerFile](https://github.com/danielbc09/Proyecto_CC/blob/master/contenedores/Dockerfile)   . Nuestro archivo conesta compuesto de los siguientes elementos.
+Para crear el contenedor es necesario crear primero el archivo [DockerFile](https://github.com/danielbc09/Proyecto_CC/blob/master/contenedores/Dockerfile). Nuestro archivo esta compuesto de los siguientes elementos.
 
-Primero se crea el contenedor basado en la imagen openjdk:8-jdk-alpine, para esto es necesario que el dockerfile descargue esta imagen , se utiliza la orden reservada FROM con ese fin
+Se crea el contenedor basado en la imagen openjdk:8-jdk-alpine, para esto es necesario que el dockerfile descargue esta imagen , se utiliza la orden reservada FROM con este fin
 
 ~~~
 FROM openjdk:8-jdk-alpine
@@ -58,13 +57,13 @@ Para saber quien le va a dar mantenimiento a la imagen o hacer mejoras se coloca
 LABEL maintainer="danielbc@correo.ugr.es"
 ~~~
 
-Se utiliza el volumen de datos en la ruta “/logs” para que la información de el contenedor persista , aunque se elimine el contenedor.
+Se utiliza el volumen de datos en la ruta “/logs” para que la información de el contenedor persista, sin importar luego que se elimine el contenedor.
 
 ~~~
 VOLUME [ "/logs" ]
 ~~~
 
-Se crean variables de entorno dentro del contenedor , para que sean leídas por el framework springboot , y poderse conectar al contenedor de base de datos.
+Se crean variables de entorno dentro del contenedor, para que sean leídas por el framework springboot , y que se pueda conectar al contenedor de base de datos.
 
 ~~~
 ENV JDBC_DATABASE_URL=url de la base de datos
@@ -79,13 +78,13 @@ Se expone el puerto 8080 para que el contenedor se ejecute en este puerto a la h
 EXPOSE 8080
 ~~~
 
-Después de ejecutar el comando ` mvn clean package` el cual nos genera el .jar de nuestra aplicación “busapp-0.0.1-SNAPSHOT.jar” se copia en el mismo directorio del Dockerfile y con ADD se añade a nuestro contenedor.
+Después de ejecutar el comando ` mvn clean package` el cual nos genera el .jar de nuestra aplicación “busapp-0.0.1-SNAPSHOT.jar” se copia en el mismo directorio en el cual esta el  Dockerfile y con ADD se añade a nuestro contenedor.
 
 ~~~
 ADD busapp-0.0.1-SNAPSHOT.jar busapp-0.0.1-SNAPSHOT.jar
 ~~~
 
-Se utiliza ENTRYPOINT para , que al crear la aplicación se ejecute el .jar “busapp-0.0.1-SNAPSHOT.jar”
+Se utiliza ENTRYPOINT para que al crear la aplicación se ejecute el .jar “busapp-0.0.1-SNAPSHOT.jar”
 
 ~~~
 ENTRYPOINT [ "java", "-jar", "/busapp-0.0.1-SNAPSHOT.jar" ]
@@ -119,7 +118,7 @@ Finalmente se utiliza push para subir la imagen a docker hub
 docker push danielbc/userservice:latest
 ~~~
 
-La siguiente imagen nos muestra nuestro contenedor publicado:
+La siguiente imagen muestra nuestro contenedor publicado:
 
 ![contenedor_publicado](https://user-images.githubusercontent.com/24718808/52476871-5148d480-2ba0-11e9-96c4-85d4f9206873.png)
 
@@ -130,11 +129,11 @@ La siguiente imagen nos muestra nuestro contenedor publicado:
 
 Esta herramienta de Docker permite definir y ejecutar  aplicaciones con múltiples contenedores como describe su [documentacion](https://docs.docker.com/compose/).
 
-Esta Herramienta se utilizó con el objetivo de orquestar nuestros contenedores de servicios de usuario y una base de datos Postgresql con sus respectivas credenciales.
+DockerCompose se utilizó con el objetivo de orquestar nuestros contenedores de servicios de usuario y una base de datos Postgresql con sus respectivas credenciales.
 
 Se utiliza un fichero YML [docker-compose.yml](https://github.com/danielbc09/Proyecto_CC/blob/master/contenedores/docker-compose.yml) en el cual se definen los dos servicios.
 
-Se utiliza la versión 2 de composer, además como se muestra en el siguiente fragmento de código , se define mediante la palabra reservada `services` los servicios que el docker-composer va a orquestar, el primero es el servicio del contenedor que está alojado en docker hub con el nombre “danielbc/userservice”, en el puerto 8080.  La instrucción `depends_on` es muy importante ya que se define que el `servicio` userservice depende el servicio de `servicepostgres`, el cual es un servicio de bases de datos que se define más adelante.
+Se utiliza la versión 2 de composer, además como se muestra en el siguiente fragmento de código , se define mediante la palabra reservada `services` los servicios que el docker-composer va a orquestar, el primero es el servicio del contenedor que está alojado en docker hub con el nombre “danielbc/userservice” en el puerto 8080.  La instrucción `depends_on` es muy importante ya que se define que el `servicio` userservice depende el servicio de `servicepostgres`, el cual es un servicio de bases de datos que se define más adelante.
 
 ~~~
 
@@ -167,15 +166,15 @@ El servicio de base de datos “servicepostgres” está definido para que desca
 ~~~
 
 
-Ya con este fichero definido solo es ejecutar el comando `docker compose  --built`  que se encarga de descargar las imágenes y orquestar la aplicación para que pueda funcionar.
+Ya con el fichero definido se ejecuta el comando `docker compose  --built`  que se encarga de descargar las imágenes y orquestar la aplicación para que pueda funcionar.
 
-Para que el proceso no se quede estancado en la terminal , podemos agregarle -d, para que los contenedores se creen y ejecuten de una forma transparente o “background”.
+Para que el proceso no se quede estancado en la terminal , podemos agregarle -d con lo cual los contenedores se cran y ejecutan de una forma transparente o “background”.
 
 ~~~
 docker compose -d --built`
 ~~~
 
-En la siguiente imagen se puede ver el el principio del resultado de la orquestación del contenedor ya que la imagen entera es muy grande para colocarla.
+En la siguiente imagen se puede ver el principio del resultado de la orquestación del contenedor ya que la imagen entera es muy grande para colocarla.
 
 ![composer_up](https://user-images.githubusercontent.com/24718808/52477318-bbae4480-2ba1-11e9-9b60-1631a7c172c8.png)
 
