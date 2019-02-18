@@ -11,10 +11,12 @@
             - [Pruebas Microservicio Tiquetes](#pruebas-tiquetes)
         - [Microservicio de Compra de tiquetes](#compra)
             - [Pruebas Microservicio de Compras](#pruebas-compra)
+        - [Project Lombok](#lombok)
    - [Creación de datos para el Inicio Aplicación (Bootstraping)](#bootstrapping)
    - [Manejo de errores](#manejo-errores)
    - [Test de la Aplicación](#test)
    - [Hitos Del Proyecto](#hitos)
+   - [Referencias](#referencias)
    
    
 <a name="descripcion"></a>
@@ -288,6 +290,20 @@ Si la cantidad de tiquetes que se desea comprar es mayor a la que existe, se mue
 ![compra_fallo](https://user-images.githubusercontent.com/24718808/52977332-27c45000-33cd-11e9-8f68-8ab7f9639b35.png)
 
 
+<a name="lombok"></a>
+#### Project Lombok
+
+[Project Lombok](https://projectlombok.org/),  es una libreria la cual se instala en el editor de texto favorito , y se utiliza para no tener que crear los getters setters y constructores
+para cada uno de los POJOS creados, los beneficios de utilizar esta librería son el ahorro de tiempo en creación de Getter, Setters Constructores, toString o hasEquals y además
+el código de cada clase se ve mucho más limpio y claro.
+
+En nuestro sistema se utilizan las siguientes etiquetas
+  
+  - @Data: etiqueta utilizada para crear los getters y setters, el constructor obligatorio, se crea el método toString , el equals y hashCode , muy importantes para el trabajo con objetos.
+  - @Builder: Esta etiqueta nos genera código para poder utilizar el patrón Builder el cual hace que la construcción de objetos sea más sencilla
+  - @NoArgsConstuctos : nos genera un constructor por defecto el cual es necesario para utilizar el JPA correctamente.
+
+
 <a name="bootstrapping"></a>
 #### Creación de datos Inicio Aplicación (Bootstraping)
 
@@ -340,6 +356,7 @@ Finalmente para la intercepción y respuesta de los errores la clase se utiliza 
 La clase RestResponseEntityExceptionHandler.java esta constituida por un `@RestControllerAdvice` el cual es un decorador que le indica al framework spring el tipo de componente que es la clase , además se ejecuta si  los errores definidos en la clase son lanzados por cualquier servicio.Por ejemplo en el siguiente pedazo de código se lanza un error de tipo ResourceNotFoundException si no se encuentra un usuario con el Id especificado. Este error va a ser respondido por el controlador “RestResponseEntityExceptionHandler.java”
 
 ~~~
+
 # 
 @Override
 public Customer getCustomerById(long id) {
@@ -399,7 +416,7 @@ Hito 9 - Entrega del MVP (minimum viable product) al cliente. [link](https://git
     
 [despliegue](https://danielbc09.github.io/Proyecto_CC/despliegue)
 
-
+<a name="referencias"></a>
 ## Referencias 
 
 - https://medium.com/netflix-techblog/tagged/microservices
@@ -410,3 +427,4 @@ Hito 9 - Entrega del MVP (minimum viable product) al cliente. [link](https://git
 - https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ControllerAdvice.html
 - https://www.baeldung.com/exception-handling-for-rest-with-spring
 - https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
+- https://projectlombok.org/
