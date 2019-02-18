@@ -68,7 +68,7 @@ public class Bootstrap  implements CommandLineRunner {
         ticketsRepository.save(Tickets.builder()
                 .ticketId(1l)
                 .route("Ruta 1")
-                .busHour(new Date())
+                .busDate(new Date())
                 .price(2.3f)
                 .quantity(10)
                 .build());
@@ -76,7 +76,7 @@ public class Bootstrap  implements CommandLineRunner {
         ticketsRepository.save(Tickets.builder()
                 .ticketId(2l)
                 .route("Ruta 2")
-                .busHour(new Date())
+                .busDate(new Date())
                 .price(1.3f)
                 .quantity(13)
                 .build());
@@ -84,7 +84,7 @@ public class Bootstrap  implements CommandLineRunner {
         ticketsRepository.save(Tickets.builder()
                 .ticketId(3l)
                 .route("Ruta 3")
-                .busHour(new Date())
+                .busDate(new Date())
                 .price(3.3f)
                 .quantity(15)
                 .build());
@@ -92,7 +92,7 @@ public class Bootstrap  implements CommandLineRunner {
         ticketsRepository.save(Tickets.builder()
                 .ticketId(4l)
                 .route("Ruta 4")
-                .busHour(new Date())
+                .busDate(new Date())
                 .price(3.3f)
                 .quantity(5)
                 .build());
@@ -100,7 +100,7 @@ public class Bootstrap  implements CommandLineRunner {
         ticketsRepository.save(Tickets.builder()
                 .ticketId(5l)
                 .route("Ruta 5")
-                .busHour(new Date())
+                .busDate(new Date())
                 .price(1f)
                 .quantity(10)
                 .build());

@@ -11,7 +11,7 @@
 
 * Jairo Daniel Bautista Castro
 
-* [Página del proyecto](https://danielbc09.github.io/Proyecto_CC/Documentacion)
+* [Página del proyecto](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md)
 
 ## Descripción del Proyecto
 
@@ -25,7 +25,7 @@ El proyecto se desarrollara con una arquitectura distribuida de Microservicios. 
 desarrollaran en el lenguaje Java con el Framerwork Spring Boot.
     
    
-[mas Información del proyecto:](https://danielbc09.github.io/Proyecto_CC/Documentacion)
+[mas Información del proyecto:](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md)
 
 ## Despliegue
 

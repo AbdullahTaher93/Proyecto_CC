@@ -1,4 +1,14 @@
-# Descripción del Proyecto
+** Indice **
+   
+   1. [Descripción del proyecto](#descripcion)
+   2. [Arquitectura del proyecto](#arquitectura)
+   3. [Desarrollo](#desarrollo)
+   4. [Test de la Aplicación](#test)
+   5. [Hitos Del Proyecto](#hitos)
+   
+   
+
+# Descripción del Proyecto <a name="descripcion"></a>
 
 El proyecto consiste en realizar una aplicación para realizar pagos de tiquetes de buses desde el móvil, con esto el usuario no tendrá que estar recargando 
 las tarjetas de los buses y los conductores no perderán el tiempo en cada estación recargando tarjetas y devolviendo cambio a los usuarios.
@@ -7,7 +17,8 @@ Un usuario puede descargar la aplicación en el celular y podrá seleccionar la 
 tiquete y le dará una opción de pago al usuario, puede ser tarjeta crédito o con PSE.Luego de que el tiquete sea comprado ,por medio de tecnología NFS lo 
 presentara para que sea validado y pueda acceder al bus.
 
-# Definición de Arquitectura
+
+# Definición de Arquitectura <a name="arquitectura"></a>
 
 El proyecto se desarrollara con una arquitectura distribuida de Microservicios, para ello se escogió el Lenguaje Java y el Framerwork Spring Boot, además se utilizará herramientas de netflix para ayudar a la gestión de los microservicios como Eurek y Zuul.
 
@@ -35,7 +46,8 @@ Imagen Arquitectura:
 ![arquitectura_app](https://user-images.githubusercontent.com/24718808/49256160-6978d680-f42e-11e8-8fbb-59359542db3b.jpg)
 
 
-## Desarrollo
+
+## Desarrollo <a name="desarrollo"></a>
 
 El proyecto está desarrollado en el lenguaje Java con el Framework Spring Boot , se escoge este framework ya que es fácil crear aplicaciones API Rest y su configuración es 
 relativamente sencilla.Este Framework se enfoca en las buenas prácticas propuestas por en el AOP([Aspect Oriented Programming](https://docs.spring.io/spring/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html)), 
@@ -44,7 +56,7 @@ Además de las buenas prácticas que se proponen en este Framework es fácil de 
 se puede configurar el acceso a  la Base de datos [PostgreSQL](https://www.postgresql.org/).
 
 
-## Test Aplicación:
+## Test Aplicación <a name="test"></a>
 
 Se va a realizar el desarrollo basado en pruebas unitarias, cada método tendrá su test unitario, se espera realizar un cubrimiento de código entre el 75 y 90 por ciento de la 
 aplicación con pruebas unitarias.
@@ -54,7 +66,7 @@ aplicación bien probada.
 
 En cuanto a las pruebas funcionales de las API Rest se utiliza la herramienta [PostMan](https://www.getpostman.com/).
 
-# Hitos del proyecto 
+# Hitos del proyecto <a name="hitos"></a>
 
 A lo largo del proyecto se tienen presente los siguientes hitos, sin embargo es posible que cambien a lo largo del proyecto
 

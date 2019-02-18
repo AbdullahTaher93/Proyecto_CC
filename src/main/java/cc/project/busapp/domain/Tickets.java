@@ -24,8 +24,8 @@ public class Tickets {
     private String route;
 
 
-    @Temporal(TemporalType.DATE)
-    Date busHour;
+    @Temporal(TemporalType.TIME)
+    Date busDate;
 
     @NotNull
     private float price;
