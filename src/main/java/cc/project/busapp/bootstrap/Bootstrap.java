@@ -1,23 +1,30 @@
 package cc.project.busapp.bootstrap;
 
 import cc.project.busapp.domain.Customer;
+import cc.project.busapp.domain.Tickets;
 import cc.project.busapp.repositories.CustomerRepository;
+import cc.project.busapp.repositories.TicketsRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import java.util.Arrays;
+import java.util.Date;
 
 @Component
 public class Bootstrap  implements CommandLineRunner {
 
     private CustomerRepository customerRepository;
 
-    public Bootstrap(CustomerRepository customerRepository) {
+    private TicketsRepository ticketsRepository;
+
+    public Bootstrap(CustomerRepository customerRepository, TicketsRepository ticketsRepository) {
         this.customerRepository = customerRepository;
+        this.ticketsRepository = ticketsRepository;
     }
 
     @Override
         public void run(String... args) throws Exception {
             loadCustomer();
+            loadTickets();
         }
 
     public void loadCustomer (){
@@ -57,14 +64,54 @@ public class Bootstrap  implements CommandLineRunner {
                 .roles(Arrays.asList("ROLE_USER"))
                 .build());
 
+      System.out.println("**********************Users Loaded****************************"+ customerRepository.count());
 
-/*
-        customerRepository.save(customer2);
-        customerRepository.save(customer3);
-        customerRepository.save(customer4);
-*/
-        System.out.println("**********************Users Loaded****************************"+ customerRepository.count());
 
+    }
+
+
+    public void loadTickets() {
+
+        ticketsRepository.save(Tickets.builder()
+                .ticketId(1l)
+                .route("Ruta 1")
+                .busHour(new Date())
+                .price(2.3f)
+                .quantity(10)
+                .build());
+
+        ticketsRepository.save(Tickets.builder()
+                .ticketId(2l)
+                .route("Ruta 2")
+                .busHour(new Date())
+                .price(1.3f)
+                .quantity(13)
+                .build());
+
+        ticketsRepository.save(Tickets.builder()
+                .ticketId(3l)
+                .route("Ruta 3")
+                .busHour(new Date())
+                .price(3.3f)
+                .quantity(15)
+                .build());
+
+        ticketsRepository.save(Tickets.builder()
+                .ticketId(4l)
+                .route("Ruta 4")
+                .busHour(new Date())
+                .price(3.3f)
+                .quantity(5)
+                .build());
+
+        ticketsRepository.save(Tickets.builder()
+                .ticketId(5l)
+                .route("Ruta 5")
+                .busHour(new Date())
+                .price(1f)
+                .quantity(10)
+                .build());
+        System.out.println("**********************Tickets Loaded****************************"+ ticketsRepository.count());
 
     }
 }
