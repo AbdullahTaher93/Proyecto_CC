@@ -33,7 +33,6 @@ public class Customer {
     @NotNull
     private String email;
 
-    @NotNull
     @JsonIgnore
     private String password;
 

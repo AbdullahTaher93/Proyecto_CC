@@ -1,10 +1,12 @@
 # Indice
    
-   1. [Descripción del proyecto](#descripcion)
-   2. [Arquitectura del proyecto](#arquitectura)
-   3. [Desarrollo](#desarrollo)
-   4. [Test de la Aplicación](#test)
-   5. [Hitos Del Proyecto](#hitos)
+   - [Descripción del proyecto](#descripcion)
+   - [Arquitectura del proyecto](#arquitectura)
+   - [Desarrollo](#desarrollo)
+        - [Microservicio Usuarios](#usuarios)
+        - [Microservicio Tiquetes](#tiquetes)
+   - [Test de la Aplicación](#test)
+   - [Hitos Del Proyecto](#hitos)
    
    
 <a name="descripcion"></a>
@@ -49,11 +51,134 @@ Imagen Arquitectura:
 <a name="desarrollo"></a>
 ## Desarrollo 
 
-El proyecto está desarrollado en el lenguaje Java con el Framework Spring Boot , se escoge este framework ya que es fácil crear aplicaciones API Rest y su configuración es 
+El proyecto está desarrollado en el lenguaje Java con el Framework Spring-Boot , se escoge este framework ya que es fácil crear aplicaciones API Rest y su configuración es 
 relativamente sencilla.Este Framework se enfoca en las buenas prácticas propuestas por en el AOP([Aspect Oriented Programming](https://docs.spring.io/spring/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html)), 
 el cual promueve prácticas de desarrollo con bajo acoplamiento, dividiendo capas como Repositorios, Servicios , y  Modelos de negocio.
 Además de las buenas prácticas que se proponen en este Framework es fácil de configurar con cualquier base de datos , en este caso utilizando Hibernate como ORM 
 se puede configurar el acceso a  la Base de datos [PostgreSQL](https://www.postgresql.org/).
+
+### Conexion con la base de datos Postgresql
+
+Para realizar la conexión con la base de datos, se utiliza el driver JPA de Spring boot en el (archivo)[https://github.com/danielbc09/Proyecto_CC/blob/master/src/main/resources/application.properties] en el cual
+se configuran las siguientes propiedades:
+
+~~~
+##  Propiedades para el acceso a la base de datos basadas en variables de entorno de los usuarios, para evitar problemas de seguridad.
+
+    spring.datasource.url=${JDBC_DATABASE_URL}
+    spring.datasource.username=${JDBC_DATABASE_USERNAME}
+    spring.datasource.password=${JDBC_DATABASE_PASSWORD}
+
+# Se ejecuta esta instrucción para que cuando se reinicie el sistema se borren los datos y se vuelvan a crear desde 0 otra vez.
+    spring.jpa.hibernate.ddl-auto=create-drop
+
+
+~~~
+<a name="usuarios"></a>
+### Microservicios Usuarios 
+
+
+Para este Microservicio se realiza un servicio para gestionar los usuarios de la aplicación, es un crud de usuarios en el cual se pueden crear añadir y actualizar nuestros usuarios 
+de la aplicación.
+
+
+La siguiente es el API Rest del mircoservicio.
+
+~~~
+
+    * GET "/user"  : Nos retorna todos los usuarios
+    
+    * GET "/user/{id}" : Nos regresa un usuario basado en el Id.
+    
+    * POST "/user" : Crea un usuario si se envía los parámetros correctamente.
+    
+    * PUT "/user/{id}" : Modifica un usuario basado el Id el mismo.
+    
+    * DELETE "/user/{id}": Se elimina un usuario basado en el Id.
+
+~~~
+
+
+### Pruebas Microservicio Usuarios
+
+Las siguientes Imagenes muestran pruebas funcionales del APi Rest del Microservicio de usuarios.
+
+#### Get Usuarios
+
+EL metodo GET en la ruta `/user` nos retorna los usuarios  de la aplicación.
+
+![getusuarios](https://user-images.githubusercontent.com/24718808/52973910-0a3cb980-33c0-11e9-9e93-f9001de862f2.png)
+
+
+EL metodo GET en la ruta `/user/{usuarioId}` nos muestra un usuario individual.
+
+![usuario_exitoso](https://user-images.githubusercontent.com/24718808/52974036-73243180-33c0-11e9-8f52-e3740a27724c.png)
+
+
+Si no existe el usuario con el Id nos muestra el siguiente error
+
+~~~
+{
+    "timestamp": "2019-02-18T20:03:54.765+0000",
+    "message": "Usuario con id :6 no encontrado",
+    "details": "uri=/user/6",
+    "httpCodeMessage": "Not Found"
+}
+~~~
+
+#### Creación y Actualización de Usuarios
+
+
+En metodo POST en la ruta `/user/{usuarioId}` nos permite crear los usuarios de la aplicación, sin embargo es necesario enviar una petición `JSON(application/json)` con los
+siguientes valores:
+
+~~~
+{
+    "name": "Usuario Nuevo",
+    "userName": "nuevousuario",
+    "email": "WillieDMorrison@superrito.com",
+    "password" : "1234",
+    "roles": [
+        "ROLE_INVENTED"
+    ]
+}
+~~~
+
+
+Si se envian los parametros correctos obtenemos el siguiente resultado
+
+![post_exitoso_usuarios](https://user-images.githubusercontent.com/24718808/52974614-76202180-33c2-11e9-9872-a4b7e0ac3304.png)
+
+Si no se envían los valores obligatorios como userName name o  email , nos muestra la siguiente excepción
+
+~~~
+{
+    "timestamp": "2019-02-18T20:08:51.444+0000",
+    "message": "Argumentos ingresados no validos.",
+    "details": "Alguno de los valores los cuales ingresó no están permitidos por favor ingrese los atributos de la entidad que va a agregar. ",
+    "httpCodeMessage": "Bad Request"
+}
+~~~
+
+Para actualizar los usuarios con el metodo PUT en la ruta `/user/{usuarioId}` , nos muestra esta imagen si encuentra al usuario y los parametros son exitosos.
+
+
+![put_ususarios](https://user-images.githubusercontent.com/24718808/52974758-06f6fd00-33c3-11e9-9b82-6314da7c3f05.png)
+
+#### Eliminación de usuarios.
+
+Finalmente con el método DELETE en la ruta `/user/{usuarioId}` se  borra a un usuario Dependiendo del ID que se ingrese. Si el usuario no existe nos muestra el siguiente error:
+
+~~~
+{
+    "timestamp": "2019-02-18T20:14:08.329+0000",
+    "message": "Usuario con id :20 no encontrado",
+    "details": "uri=/user/20",
+    "httpCodeMessage": "Not Found"
+}
+~~~
+
+
 
 <a name="test"></a>
 ## Test Aplicación 

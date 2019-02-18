@@ -37,6 +37,7 @@ public class CustomerController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Customer createUser(@RequestBody @Valid Customer customer) {
+        System.out.println("Password" + customer.toString());
         return customerService.createCustomer(customer);
     }
 
