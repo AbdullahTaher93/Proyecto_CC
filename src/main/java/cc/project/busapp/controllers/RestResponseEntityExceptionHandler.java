@@ -4,7 +4,6 @@ import cc.project.busapp.errors.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -38,17 +37,11 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
 
-    @ExceptionHandler(value = {BadCredentialsException.class})
-    public ResponseEntity badCredentialException(BadCredentialsException ex, WebRequest request) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false), HttpStatus.UNAUTHORIZED.getReasonPhrase());
-        return new ResponseEntity<ExceptionResponse>(exceptionResponse, new HttpHeaders(), HttpStatus.UNAUTHORIZED);
-    }
-
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        PropertiesErrorDetails exceptionResponse =
-                new PropertiesErrorDetails(new Date(), "Error de validacion", ex.getBindingResult().getFieldErrors().toString());
-        return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(new Date(), ex.getMessage(), ex.getBindingResult().getFieldErrors().toString(), HttpStatus.BAD_REQUEST.getReasonPhrase());
+        return new ResponseEntity<Object>(exceptionResponse, new HttpHeaders(),HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)

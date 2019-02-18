@@ -3,15 +3,12 @@ package cc.project.busapp.services;
 import cc.project.busapp.domain.Customer;
 import cc.project.busapp.errors.ResourceNotFoundException;
 import cc.project.busapp.repositories.CustomerRepository;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CustomerServiceImpl implements CustomerService, UserDetailsService {
+public class CustomerServiceImpl implements CustomerService{
 
 
     private CustomerRepository customerRepository;
@@ -32,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
 
     @Override
-    public Customer createXustomer(Customer customer){
+    public Customer createCustomer(Customer customer){
         return customerRepository.save(customer);
     }
 
@@ -57,9 +54,4 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         return this.customerRepository.findByUserName(username).orElseThrow(() -> new ResourceNotFoundException("Usuario con nombre :" + username + " encontrado"));
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return this.customerRepository.findByUserName(username).orElseThrow(() -> new ResourceNotFoundException("Usuario con nombre :" + username + " not encontrado"));
-    }
 }

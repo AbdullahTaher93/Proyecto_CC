@@ -37,7 +37,7 @@ public class CustomerController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Customer createUser(@RequestBody @Valid Customer customer) {
-        return customerService.createXustomer(customer);
+        return customerService.createCustomer(customer);
     }
 
 
