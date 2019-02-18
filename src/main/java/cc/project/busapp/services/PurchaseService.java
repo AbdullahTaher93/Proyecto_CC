@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface PurchaseService {
 
-    Purchase purchaseTicket(long userId, long ticketId);
+    Purchase purchaseTicket(long userId, long ticketId, int quantity);
 
     List<Purchase> getAllPurchases();
 }

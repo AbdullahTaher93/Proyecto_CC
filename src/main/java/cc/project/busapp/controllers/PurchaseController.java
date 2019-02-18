@@ -19,14 +19,14 @@ public class PurchaseController {
         this.purchaseService = purchaseService;
     }
 
-    @PostMapping("/{userId}/{ticketId}")
+    @PostMapping("/{userId}/{ticketId}/{quantity}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Purchase purchaseTicket(@PathVariable long userId, @PathVariable long ticketId){
+    public Purchase purchaseTicket(@PathVariable long userId, @PathVariable long ticketId, @PathVariable int quantity){
 
         System.out.println("Parametro ususario Id" + userId);
         System.out.println("Parametro ticket ID" + ticketId);
-
-        return purchaseService.purchaseTicket(userId, ticketId);
+        System.out.println("Parametro ticket ID" + quantity);
+        return purchaseService.purchaseTicket(userId, ticketId, quantity);
     }
 
 

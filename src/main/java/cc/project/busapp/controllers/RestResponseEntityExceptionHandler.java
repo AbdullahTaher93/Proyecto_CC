@@ -18,6 +18,7 @@ import java.util.Date;
 @RestControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
+
     @ExceptionHandler({ResourceNotFoundException.class})
     public ResponseEntity<ExceptionResponse> handleNotFoundException(Exception exception, WebRequest request) {
 
@@ -32,7 +33,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), exception.getMessage(), request.getDescription(false), HttpStatus.NOT_FOUND.getReasonPhrase());
         return new ResponseEntity<ExceptionResponse>(exceptionResponse, new HttpHeaders(), HttpStatus.NOT_FOUND);
-
 
     }
 
@@ -52,4 +52,14 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+
+
+    @ExceptionHandler(ErrorQuantityPurchase.class)
+    public ResponseEntity<Object> handlePurchaseErrorNotValid(ErrorQuantityPurchase exception, WebRequest request){
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(new Date(), exception.getMessage(), "Esta intentando comprar mas tiquetes de los que existen", HttpStatus.BAD_REQUEST.getReasonPhrase());
+
+        return new ResponseEntity<Object>(exceptionResponse, new HttpHeaders(),HttpStatus.BAD_REQUEST);
+    }
+
 }

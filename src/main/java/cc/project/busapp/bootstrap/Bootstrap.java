@@ -29,14 +29,7 @@ public class Bootstrap  implements CommandLineRunner {
 
     public void loadCustomer (){
 
-    /*
-        Customer customer1 = new Customer(1l, "Jhon Doe", "jhonDoe", "jhonDoe@mail.com");
-        Customer customer2 = new Customer(2l, "Pamela J. Travis", "PamelaJT", "PamelaJTravis@gustr.com");
-        Customer customer3 = new Customer(3l, "Willie D. Morrison", "WillieD", "WillieDMorrison@superrito.com");
-        Customer customer4 = new Customer(4l, "Homer F. Martin", "HomerF", "HomerFMartin@superrito.com");
 
-        Customer customer1 = new Customer(1l, "eswe", "dasda", "ssadsd@gmail.com", "");
-*/
         customerRepository.save(Customer.builder()
                             .userId(1l)
                             .name("Jhon Doe")

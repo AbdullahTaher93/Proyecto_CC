@@ -26,4 +26,16 @@ public class TicketServiceImpl implements TicketService {
     public Tickets getTicketById(long ticketId) {
         return ticketsRepository.findById(ticketId).orElseThrow(() -> new ResourceNotFoundException("Tickete numero "+ ticketId +" no disponible "));
     }
+
+    @Override
+    public Tickets updateTicket(long tickedId, Tickets updateTicked) {
+        Tickets findTicked = getTicketById(tickedId);
+
+        updateTicked.setTicketId(findTicked.getTicketId());
+
+        return  ticketsRepository.save(updateTicked);
+    }
+
 }
+
+
