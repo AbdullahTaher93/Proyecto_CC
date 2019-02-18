@@ -2,12 +2,17 @@
    
    - [Descripción del proyecto](#descripcion)
    - [Arquitectura del proyecto](#arquitectura)
+   - [Expliación General Spring Framerwork](#springboot)
    - [Desarrollo](#desarrollo)
+        - [Conexion con la base de datos Postgresql](#base-datos)
         - [Microservicio Usuarios](#usuarios)
             - [Pruebas Microservicio Usuarios](#pruebas-usuario)
         - [Microservicio Gestión de Tiquetes](#tiquetes)
             - [Pruebas Microservicio Tiquetes](#pruebas-tiquetes)
         - [Microservicio de Compra de tiquetes](#compra)
+            - [Pruebas Microservicio de Compras](#pruebas-compra)
+   - [Creación de datos para el Inicio Aplicación (Bootstraping)](#bootstrapping)
+   - [Manejo de errores](#manejo-errores)
    - [Test de la Aplicación](#test)
    - [Hitos Del Proyecto](#hitos)
    
@@ -50,6 +55,20 @@ Imagen Arquitectura:
 
 ![arquitectura_app](https://user-images.githubusercontent.com/24718808/49256160-6978d680-f42e-11e8-8fbb-59359542db3b.jpg)
 
+<a name="springboot"></a>
+## Expliación General Spring Framerwork
+
+
+Para el desarrollo de la aplicación se eligió el framerwork spring-boot el cual tiene una gran variedad de servicios para realizar microservicios en el lenguaje Java.
+
+Una de las ventajas de Spring es el desarrollo por diferentes componentes , los cuales son, como los controladores, Entidades, servicios y repositorios. Cada uno de los componentes tienen la siguiente función.
+
+Controladores Rest : Son controladores que se encargan de recibir la URL y el método http por el cliente , además de regresar un Objeto Json con la respuesta indicada.
+Dominio O entidades: Son el dominio de negocio de nuestros Microservicios , se crean con el propósito de definir las entidades principales de nuestro sistema , además con  la ayuda del ORM hibernate se crean las tablas en la base de datos sin necesidad de realizar Queries SQL.
+Servicios: Los servicios se definen como las operaciones que una clase dominio necesita realizar , es decir aquí se definen las operaciones lógicas de nuestro Modelo de negocio o entidades. Por ejemplo la creación de usuarios o la compra del tiquete.
+Repositorios: Utilizan Una interfaz jpa y son los encargados de abstraer las operaciones con la base de datos , se utilizan para realizar la persistencia del objeto y en la aplicación se comunican con los servicios.
+
+
 
 
 <a name="desarrollo"></a>
@@ -61,6 +80,7 @@ el cual promueve prácticas de desarrollo con bajo acoplamiento, dividiendo capa
 Además de las buenas prácticas que se proponen en este Framework es fácil de configurar con cualquier base de datos , en este caso utilizando Hibernate como ORM 
 se puede configurar el acceso a  la Base de datos [PostgreSQL](https://www.postgresql.org/).
 
+<a name="base-datos"></a>
 ### Conexion con la base de datos Postgresql
 
 Para realizar la conexión con la base de datos, se utiliza el driver JPA de Spring boot en el (archivo)[https://github.com/danielbc09/Proyecto_CC/blob/master/src/main/resources/application.properties] en el cual
@@ -220,7 +240,7 @@ nos muestra el siguiente resultado.
 
 
 
-<a name="compras"></a>
+<a name="compra"></a>
 ### Microservicio de Compra de tiquetes
 
 El microservicio de gestión de compras de tiquetes es el encargado de la realización de la venta de tiquetes para los usuarios, 
@@ -267,6 +287,77 @@ Si la cantidad de tiquetes que se desea comprar es mayor a la que existe, se mue
 
 ![compra_fallo](https://user-images.githubusercontent.com/24718808/52977332-27c45000-33cd-11e9-8f68-8ab7f9639b35.png)
 
+
+<a name="bootstrapping"></a>
+#### Creación de datos Inicio Aplicación (Bootstraping)
+
+Para realizar la creacion de datos de prueba en cada microservicio se realiza en la clase [Bootstrap.java](https://github.com/danielbc09/Proyecto_CC/blob/master/src/main/java/cc/project/busapp/bootstrap/Bootstrap.java) el ingreso de los datos de la aplicación. Esta clase como podemos ver implemente `CommandLineRunner` lo cual hace que 
+esta clase se la primera en ejecutarse despues de haber cargado la aplicación , En ella se crean los primeros datos de prueba  para la aplicación.
+
+Como se puede ver en la siguiente linea de codigo de ejemplo, para cada objeto creado se utiliza su respectivo repositorio, el cual mediante JPA de java guarda el dato en la base de datos que 
+se tenga configurada.
+
+~~~
+ customerRepository.save(Customer.builder()
+                            .userId(1l)
+                            .name("Jhon Doe")
+                            .userName("admin")
+                            .email("admin@admin.com")
+                            .password("1234")
+                            .roles(Arrays.asList("ROLE_USER", "ROLE_ADMIN"))
+                            .build());
+~~~
+
+Lo que hace el anterior pedazo de código , es utilizar el repositorio `customerRepository` para guardar un objeto Customer , creado utilizando el patrón de diseño builder con ayuda de la librería Lombok
+que se hablará más tarde.
+
+Finalmente en la siguiente pedazo de código la aplicación ejecuta los metodos de creación y de usuarios y tiquetes.
+~~~
+@Override
+        public void run(String... args) throws Exception {
+            loadCustomer();
+            loadTickets();
+        }
+
+~~~
+
+Cabe destacar , que estos datos se guardan en la base de datos la cual se haya configurado , ya sea postgresql en nuestro caso o cualquier otra.
+
+<a name="manejo-errores"></a>
+## Manejo de Errores
+
+
+Para el manejo de errores de los microservicios  se crea el paquete de errores en el cual tenemos definido dos clases DirectionNotFountException.java  y ResourceNotFoundException,.java las cuales básicamente manejan los errores más generales de la aplicación.
+
+El error DirectionNotFoundException se lanza cuando no se encuentra una ruta en la aplicación.
+
+El error ResourceNotFoundException se lanza cuando un recurso , ya sea un usuario o tiquete no existen.
+
+La clase PojoExceptionResponse.java es un Pojo el cual es utilizado para la personalización de los mensajes de errores  con el objetivo que el usuario final vea de una forma amigable errores de usuario.
+
+Finalmente para la intercepción y respuesta de los errores la clase se utiliza la clase RestResponseEntityExceptionHandler.java , en el ambiente de spring es una forma muy general de manejar errores , por lo tanto se crean estas clases adaptándolas a  nuestras necesidades basadas en las prácticas generales. 
+
+La clase RestResponseEntityExceptionHandler.java esta constituida por un `@RestControllerAdvice` el cual es un decorador que le indica al framework spring el tipo de componente que es la clase , además se ejecuta si  los errores definidos en la clase son lanzados por cualquier servicio.Por ejemplo en el siguiente pedazo de código se lanza un error de tipo ResourceNotFoundException si no se encuentra un usuario con el Id especificado. Este error va a ser respondido por el controlador “RestResponseEntityExceptionHandler.java”
+
+~~~
+# 
+@Override
+public Customer getCustomerById(long id) {
+   return customerRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Usuario con id :" + id + " no encontrado"));
+}
+
+~~~
+
+
+Las referencias de estas prácticas están en los siguientes links:
+
+- https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ControllerAdvice.html
+- https://www.baeldung.com/exception-handling-for-rest-with-spring
+- https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
+
+
+
+ 
 <a name="test"></a>
 ## Test Aplicación 
 
@@ -281,7 +372,7 @@ En cuanto a las pruebas funcionales de las API Rest se utiliza la herramienta [P
 <a name="hitos"></a>
 # Hitos del proyecto 
 
-A lo largo del proyecto se tienen presente los siguientes hitos, sin embargo es posible que cambien a lo largo del proyecto
+A lo largo del proyecto se tienen presente los siguientes hitos, sin embargo es posible que cambien a lo largo del proyecto.
 
 
 Hito 0 - Uso correcto de Git y GitHub [link](https://github.com/danielbc09/Proyecto_CC/milestone/1)
@@ -309,3 +400,13 @@ Hito 9 - Entrega del MVP (minimum viable product) al cliente. [link](https://git
 [despliegue](https://danielbc09.github.io/Proyecto_CC/despliegue)
 
 
+## Referencias 
+
+- https://medium.com/netflix-techblog/tagged/microservices
+- https://docs.spring.io/spring/docs/2.5.x/reference/aop.html
+- https://martinfowler.com/articles/microservices.html
+- https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+- https://dzone.com/articles/spring-boot-applicationrunner-and-commandlinerunner
+- https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/ControllerAdvice.html
+- https://www.baeldung.com/exception-handling-for-rest-with-spring
+- https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc

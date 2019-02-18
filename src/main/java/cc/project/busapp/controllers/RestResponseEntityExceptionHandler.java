@@ -20,28 +20,28 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
 
     @ExceptionHandler({ResourceNotFoundException.class})
-    public ResponseEntity<ExceptionResponse> handleNotFoundException(Exception exception, WebRequest request) {
+    public ResponseEntity<PojoExceptionResponse> handleNotFoundException(Exception exception, WebRequest request) {
 
-        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), exception.getMessage(), request.getDescription(false), HttpStatus.NOT_FOUND.getReasonPhrase());
-        return new ResponseEntity<ExceptionResponse>(exceptionResponse, new HttpHeaders(), HttpStatus.NOT_FOUND);
+        PojoExceptionResponse pojoExceptionResponse = new PojoExceptionResponse(new Date(), exception.getMessage(), request.getDescription(false), HttpStatus.NOT_FOUND.getReasonPhrase());
+        return new ResponseEntity<PojoExceptionResponse>(pojoExceptionResponse, new HttpHeaders(), HttpStatus.NOT_FOUND);
 
 
     }
 
     @ExceptionHandler({DirectionNotFoundException.class})
-    public ResponseEntity<ExceptionResponse> handleUrlNotFoundException(Exception exception, WebRequest request) {
+    public ResponseEntity<PojoExceptionResponse> handleUrlNotFoundException(Exception exception, WebRequest request) {
 
-        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), exception.getMessage(), request.getDescription(false), HttpStatus.NOT_FOUND.getReasonPhrase());
-        return new ResponseEntity<ExceptionResponse>(exceptionResponse, new HttpHeaders(), HttpStatus.NOT_FOUND);
+        PojoExceptionResponse pojoExceptionResponse = new PojoExceptionResponse(new Date(), exception.getMessage(), request.getDescription(false), HttpStatus.NOT_FOUND.getReasonPhrase());
+        return new ResponseEntity<PojoExceptionResponse>(pojoExceptionResponse, new HttpHeaders(), HttpStatus.NOT_FOUND);
 
     }
 
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        ExceptionResponse exceptionResponse =
-                new ExceptionResponse(new Date(), "Argumentos ingresados no validos.", "Alguno de los valores los cuales ingresó no están permitidos por favor ingrese los atributos de la entidad que va a agregar. ", HttpStatus.BAD_REQUEST.getReasonPhrase());
-        return new ResponseEntity<Object>(exceptionResponse, new HttpHeaders(),HttpStatus.BAD_REQUEST);
+        PojoExceptionResponse pojoExceptionResponse =
+                new PojoExceptionResponse(new Date(), "Argumentos ingresados no validos.", "Alguno de los valores los cuales ingresó no están permitidos por favor ingrese los atributos de la entidad que va a agregar. ", HttpStatus.BAD_REQUEST.getReasonPhrase());
+        return new ResponseEntity<Object>(pojoExceptionResponse, new HttpHeaders(),HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
@@ -56,10 +56,10 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     @ExceptionHandler(ErrorQuantityPurchase.class)
     public ResponseEntity<Object> handlePurchaseErrorNotValid(ErrorQuantityPurchase exception, WebRequest request){
-        ExceptionResponse exceptionResponse =
-                new ExceptionResponse(new Date(), exception.getMessage(), "Esta intentando comprar mas tiquetes de los que existen", HttpStatus.BAD_REQUEST.getReasonPhrase());
+        PojoExceptionResponse pojoExceptionResponse =
+                new PojoExceptionResponse(new Date(), exception.getMessage(), "Esta intentando comprar mas tiquetes de los que existen", HttpStatus.BAD_REQUEST.getReasonPhrase());
 
-        return new ResponseEntity<Object>(exceptionResponse, new HttpHeaders(),HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<Object>(pojoExceptionResponse, new HttpHeaders(),HttpStatus.BAD_REQUEST);
     }
 
 }
