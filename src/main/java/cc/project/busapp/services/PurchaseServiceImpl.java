@@ -42,7 +42,7 @@ public class PurchaseServiceImpl implements PurchaseService {
                     .customerId(buyer.getUserId())
                     .CustomerName(buyer.getName())
                     .pricePerTicket(ticket.getPrice())
-                    .quantity(ticket.getQuantity())
+                    .quantity(quantity)
                     .route(ticket.getRoute())
                     .totalPrice((ticket.getPrice() * ticket.getQuantity()))
                     .build();

@@ -26,4 +26,10 @@ public class TicketsController {
     }
 
 
+    @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public  Tickets getTicketByID(@PathVariable int id){
+        return this.ticketService.getTicketById(id);
+    }
+
 }

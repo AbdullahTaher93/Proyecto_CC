@@ -4,7 +4,10 @@
    - [Arquitectura del proyecto](#arquitectura)
    - [Desarrollo](#desarrollo)
         - [Microservicio Usuarios](#usuarios)
-        - [Microservicio Tiquetes](#tiquetes)
+            - [Pruebas Microservicio Usuarios](#pruebas-usuario)
+        - [Microservicio Gestión de Tiquetes](#tiquetes)
+            - [Pruebas Microservicio Tiquetes](#pruebas-tiquetes)
+        - [Microservicio de Compra de tiquetes](#compra)
    - [Test de la Aplicación](#test)
    - [Hitos Del Proyecto](#hitos)
    
@@ -37,7 +40,7 @@ La base de datos para cada microservicio puede variar, sin embargo está pensado
 Los Microserivicios que se proponen para el sistemas son los siguientes:
 
     - Gestión de usuarios (microservicio encargado de manejar el login y los usuarios de la aplicación).
-    - Procesamiento de pagos (microservicio encargado de gestionar el pago de los tiquetes).
+    - Compra de tiquetes (microservicio encargado de gestionar el pago de los tiquetes).
     - Gestión y validación de tiquetes(Se encargará, de gestionar la compra y validacion de los iquetes).
     - Rutas y Estaciones (microservicio encargado de mostrar las rutas y estaciones degranada).
     - Servicio para manejo de logs.
@@ -46,6 +49,7 @@ Imagen Arquitectura:
 
 
 ![arquitectura_app](https://user-images.githubusercontent.com/24718808/49256160-6978d680-f42e-11e8-8fbb-59359542db3b.jpg)
+
 
 
 <a name="desarrollo"></a>
@@ -98,10 +102,10 @@ La siguiente es el API Rest del mircoservicio.
 
 ~~~
 
+<a name="pruebas-usuario"></a>
+#### Pruebas Microservicio Usuarios
 
-### Pruebas Microservicio Usuarios
-
-Las siguientes Imagenes muestran pruebas funcionales del APi Rest del Microservicio de usuarios.
+Las siguientes Imagenes muestran pruebas funcionales del API Rest del Microservicio de usuarios.
 
 #### Get Usuarios
 
@@ -165,7 +169,7 @@ Para actualizar los usuarios con el metodo PUT en la ruta `/user/{usuarioId}` , 
 
 ![put_ususarios](https://user-images.githubusercontent.com/24718808/52974758-06f6fd00-33c3-11e9-9b82-6314da7c3f05.png)
 
-#### Eliminación de usuarios.
+#### Eliminación de Usuarios.
 
 Finalmente con el método DELETE en la ruta `/user/{usuarioId}` se  borra a un usuario Dependiendo del ID que se ingrese. Si el usuario no existe nos muestra el siguiente error:
 
@@ -177,8 +181,91 @@ Finalmente con el método DELETE en la ruta `/user/{usuarioId}` se  borra a un u
     "httpCodeMessage": "Not Found"
 }
 ~~~
+<a name="pruebas-usuario"></a>
+
+### Microservicio Tiquetes
+
+El microservicio de Gestión y validación de tiquetes nos muestra los datos de los tiquetes de bus como lo son la ruta del bus, el horario del bus, el precio del tiquete y la
+cantidad de los tiquetes que nos quedan a la venta.
+
+Su API rest es:
+
+~~~
+
+    * GET "/tickets"  : Nos retorna todos los tiquetes
+    
+    * GET "/tickets/{id}" : Nos regresa un tiquete basado en el Id.
+   
+~~~
 
 
+<a name="pruebas-tiquetes"></a>
+#### Pruebas Microservicio Tiquetes 
+
+
+Las siguientes Imagenes muestran pruebas funcionales del API Rest del Microservicio de tiquetes.
+
+
+
+#### Obtener Los tiquetes.
+
+En la ruta `/tickets` podemos obtener todos nuestros tiquetes que existen en la aplicación.
+
+![get_tiquetes](https://user-images.githubusercontent.com/24718808/52975713-cef1b900-33c6-11e9-9aaf-60608a6468be.png)
+
+para obtener un tiquete individual se puede acceder mediante la ruta `/tickets/{id-tiquete}`, si el tiquete no existe , 
+nos muestra el siguiente resultado.
+
+![tiquete_no_encontrado](https://user-images.githubusercontent.com/24718808/52975904-92728d00-33c7-11e9-8011-0d670e62c7de.png)
+
+
+
+<a name="compras"></a>
+### Microservicio de Compra de tiquetes
+
+El microservicio de gestión de compras de tiquetes es el encargado de la realización de la venta de tiquetes para los usuarios, 
+los datos necesarios son , el ID del usuario el cual va a comprar el tiquete, el ID del tiquete y la cantidad de tiquetes a comprar.
+
+También este servicio válida si existen los suficientes tiquetes en inventario para la realización de la compra.
+Finalmente  muestra las compras que se han hecho de los tiquetes los datos que muestra son,  el ID de la compra , el ID y el nombre del cliente , la ruta del bus, el precio por unidad de cada tiquete, la cantidad de tiquetes  comprados y el precio total de los tiquetes.
+
+
+Su API rest es:
+
+~~~
+    * GET "/compras"  : Nos retorna las compras hechas en el sistema.
+    
+    * POST "/compras/{id-del-usuario}/{id-tiquete}/cantidad" : Metodo para realizar la compra de un tiquete
+~~~
+
+<a name="pruebas-compra"></a>
+#### Pruebas Microservicio de compra de tiquetes
+
+La pruebas funcionales del microservicio son las siguientes:
+
+#### Obtener Las Compras
+
+para obtener las compras hechas es necesario hacer una petición get a la siguiente ruta `/compras`. Si existen compras, obtenemos los siguientes resultados:
+
+![get_compras](https://user-images.githubusercontent.com/24718808/52977074-2f372980-33cc-11e9-8c03-aa70787fdf8c.png)
+
+
+#### Realizar una Compra
+
+Para realizar una compra es necesario hacer un POST a la ruta `/compras/{id-usuario}/{id-tiquete}/cantidad` , estos parámetros deben ser números enteros, además
+el servicio permite calcular el precio de la compra, resta tiquetes de la base de datos y valida si la cantidad de tiquetes a comprar
+es mayor que la existente.
+
+Si la compra se realiza con éxito nos muestra el siguiente resultado
+
+![compra_exito](https://user-images.githubusercontent.com/24718808/52977324-23983280-33cd-11e9-88c7-b6c4353674c6.png)
+
+
+Si el usuario o tiquetes no existen se muestran errores como los anteriormente mencionados cuando un tiquete o un usuario no existen en el sistema.
+
+Si la cantidad de tiquetes que se desea comprar es mayor a la que existe, se muestra el siguiente error.
+
+![compra_fallo](https://user-images.githubusercontent.com/24718808/52977332-27c45000-33cd-11e9-8f68-8ab7f9639b35.png)
 
 <a name="test"></a>
 ## Test Aplicación 
