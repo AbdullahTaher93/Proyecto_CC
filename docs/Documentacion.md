@@ -65,10 +65,10 @@ Para el desarrollo de la aplicación se eligió el framerwork spring-boot el cua
 
 Una de las ventajas de Spring es el desarrollo por diferentes componentes , los cuales son, como los controladores, Entidades, servicios y repositorios. Cada uno de los componentes tienen la siguiente función.
 
-Controladores Rest : Son controladores que se encargan de recibir la URL y el método http por el cliente , además de regresar un Objeto Json con la respuesta indicada.
-Dominio O entidades: Son el dominio de negocio de nuestros Microservicios , se crean con el propósito de definir las entidades principales de nuestro sistema , además con  la ayuda del ORM hibernate se crean las tablas en la base de datos sin necesidad de realizar Queries SQL.
-Servicios: Los servicios se definen como las operaciones que una clase dominio necesita realizar , es decir aquí se definen las operaciones lógicas de nuestro Modelo de negocio o entidades. Por ejemplo la creación de usuarios o la compra del tiquete.
-Repositorios: Utilizan Una interfaz jpa y son los encargados de abstraer las operaciones con la base de datos , se utilizan para realizar la persistencia del objeto y en la aplicación se comunican con los servicios.
+- Controladores Rest : Son controladores que se encargan de recibir la URL y el método http por el cliente , además de regresar un Objeto Json con la respuesta indicada.
+- Dominio O entidades: Son el dominio de negocio de nuestros Microservicios , se crean con el propósito de definir las entidades principales de nuestro sistema , además con  la ayuda del ORM hibernate se crean las tablas en la base de datos sin necesidad de realizar Queries SQL.
+- Servicios: Los servicios se definen como las operaciones que una clase dominio necesita realizar , es decir aquí se definen las operaciones lógicas de nuestro Modelo de negocio o entidades. Por ejemplo la creación de usuarios o la compra del tiquete.
+- Repositorios: Utilizan Una interfaz jpa y son los encargados de abstraer las operaciones con la base de datos , se utilizan para realizar la persistencia del objeto y en la aplicación se comunican con los servicios.
 
 
 
@@ -85,7 +85,7 @@ se puede configurar el acceso a  la Base de datos [PostgreSQL](https://www.postg
 <a name="base-datos"></a>
 ### Conexion con la base de datos Postgresql
 
-Para realizar la conexión con la base de datos, se utiliza el driver JPA de Spring boot en el (archivo)[https://github.com/danielbc09/Proyecto_CC/blob/master/src/main/resources/application.properties] en el cual
+Para realizar la conexión con la base de datos, se utiliza el driver JPA de Spring boot en el [archivo](https://github.com/danielbc09/Proyecto_CC/blob/master/src/main/resources/application.properties) en el cual
 se configuran las siguientes propiedades:
 
 ~~~
@@ -203,7 +203,7 @@ Finalmente con el método DELETE en la ruta `/user/{usuarioId}` se  borra a un u
     "httpCodeMessage": "Not Found"
 }
 ~~~
-<a name="pruebas-usuario"></a>
+<a name="tiquetes"></a>
 
 ### Microservicio Tiquetes
 

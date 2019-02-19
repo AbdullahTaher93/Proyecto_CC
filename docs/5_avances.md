@@ -1,7 +1,19 @@
 # Avances Hito 5
 
-Para este hito se decide realizar un documento de provición para la base de datos postgreSql, para poder instalar y crear 
+Para este hito se decide realizar un archivo de proviciónamiento para la base de datos postgreSql, para poder instalar y crear 
 una base de datos y el usuario autorizado y que nuestro servicio de usuarios se pueda conectar con la base de datos.
+
+Además se avanza en la creación de los Microservicios de Tiquetes y De compras de tiquetes, además se realiza una refactorización al servicio de
+usuarios.
+
+
+## Avances Aplicación:
+
+Para consultar los servicios creados y su explicación por favor dirigirse a los siguientes links.
+
+  - [Microservicio Usuarios](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#usuarios)   
+  - [Microservicio Tiquetes](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#tiquetes)
+  - [Microservico Compras de tiquetes](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#compra)
 
 
 ### Explicación Script: 
@@ -98,7 +110,7 @@ se tuvo que dejar para una posterior entrega el arreglo de este error.
 
 ### 5 Fuentes 
 
-Firecciones que se utilizaron para crear el playbook de postgres.
+Direcciones que se utilizaron para crear el playbook de postgres.
 
 (https://docs.ansible.com/ansible/latest/modules/postgresql_db_module.html)
 

@@ -18,16 +18,16 @@
 El proyecto consiste en realizar una aplicación para realizar pagos de tiquetes de buses desde el móvil, con esto el usuario no tendrá que estar recargando 
 las tarjetas de los buses y los conductores no perderán el tiempo en cada estación recargando tarjetas y devolviendo cambio a los usuarios.
 
-
+[mas Información del proyecto:](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#descripcion)
 ## Definición de Arquitectura
 
 El proyecto se desarrollara con una arquitectura distribuida de Microservicios. Estos microservicios se 
 desarrollaran en el lenguaje Java con el Framerwork Spring Boot.
     
    
-[mas Información del proyecto:](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md)
+[mas Información de la arquitectura del proyecto:](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#arquitectura)
 
-## Despliegue
+## Despliegue Heroku 
 
 Despliegue: https://jdbusapp.herokuapp.com/
 
@@ -35,29 +35,11 @@ Se despliega la aplicación en la nube de Heroku, con la ayuda del version de co
 integración continua travis CI.
 
 El servicio que se despliega es el de usuarios. El cual se encarga de realizar un CRUD del servicio.
+[mas Información del despliegue en Heroku](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/2_heroku_despliegue.md)
 
+## API REST
 
-### API REST
-
-El servicio de Usuarios expone las operaciones de gestión de los usuarios de la aplicación , estas funcionalidades son Básicamente un CRUD de usuarios el cual nos permite Crear,Obtener,  Actualizar , Y eliminar un usuario. 
-
-Los datos son devueltos en formato Json con las diferentes respuesta para el  usuario.
-
- 
-    * GET "/" : Que nos devolvuelve una ruta ejemplo
-    
-    * GET "/user"  : Nos devolvuelve todos los usuarios
-    
-    * GET "/user/{id}" : Nos regresa un usuario basado en el Id.
-    
-    * POST "/user" : Crea un usuario si se envia los parametros correctamente.
-    
-    * PUT "/user/{id}" : Modifica un usuario basado el Id el mismo.
-    
-    * DELETE "/user/{id}": Se elimina un usuario basado en el Id.
-
-[mas Información del despliegue](https://danielbc09.github.io/Proyecto_CC/despliegue)
-
+Para mas información del API Rest de cada Microservicio dirijase al siguiente [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#desarrollo)
 
 
 ## Provisionamiento de maquinas virtuales
@@ -81,13 +63,13 @@ Para mas información sobre por favor dirjase al siguiente [link](https://github
 Despliegue Vagrant: 40.89.154.93
 
 
-Para mas información para el despliegue con vagrant por favor dirijase a este [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_orquestacion.md)
+Para mas información para el despliegue con vagrant por favor dirijase a este [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_orquestacion.md).
 
-Se ha comprobado la orquestación de EL compañero Miguel gonCalves en el [siguiente documento](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_comprobacion.md)
+Se ha comprobado la orquestación de EL compañero Miguel gonCalves en el [siguiente documento](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_comprobacion.md).
 
-El compañero Miguel ha comprobado mi orquestación , para más información dirigirse a el siguiente [link](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_2.md)
+El compañero Miguel ha comprobado mi orquestación , para más información dirigirse a el siguiente [link](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_2.md).
 
-Los avances del Hito 5 estan en el siguiente [documento](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_avances.md)
+Los avances del Hito 5 estan en el siguiente [documento](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_avances.md).
 
 
 ## Contenedores 
