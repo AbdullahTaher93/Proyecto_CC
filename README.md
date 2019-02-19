@@ -7,7 +7,7 @@
 [![Build Status](https://travis-ci.org/danielbc09/Proyecto_CC.svg?branch=master)](https://travis-ci.org/danielbc09/Proyecto_CC)
 
 
-### Autor:
+### Autor
 
 * Jairo Daniel Bautista Castro
 
