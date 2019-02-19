@@ -13,15 +13,15 @@ Vagrant.configure('2') do |config|
           azure.client_secret = ENV['AZURE_CLIENT_SECRET']
           azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']  
         
-          azure.resource_group_name = 'CChito5' 
-          azure.vm_image_urn = 'Canonical:UbuntuServer:18.04-LTS:latest'          
-          azure.vm_name = 'posgresql'
+          azure.resource_group_name = 'hito5'
+          azure.vm_image_urn = 'Canonical:UbuntuServer:18.04-LTS:latest'
+          azure.vm_name = 'bdmicroservicios'
           azure.vm_size = 'Basic_A0'
           azure.location = 'francecentral'
-          azure.admin_username = 'daniel' 
+          azure.admin_username = 'daniel'
           azure.tcp_endpoints = [22, 80, 5432]
-      end 
-    
+      end
+
       database.vm.provision 'ansible' do |ansible|
             ansible.playbook = 'provision_bd.yml'
       end
@@ -34,12 +34,12 @@ Vagrant.configure('2') do |config|
             azure.tenant_id = ENV['AZURE_TENANT_ID']
             azure.client_id = ENV['AZURE_CLIENT_ID']
             azure.client_secret = ENV['AZURE_CLIENT_SECRET']
-            azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']     
-            
-            azure.resource_group_name = 'CChito5'
+            azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
+
+            azure.resource_group_name = 'hito5'
             azure.vm_size = 'Basic_A0'
-            azure.vm_image_urn = 'Canonical:UbuntuServer:18.04-LTS:latest'      
-            azure.vm_name = 'serviciousuarios'
+            azure.vm_image_urn = 'Canonical:UbuntuServer:18.04-LTS:latest'
+            azure.vm_name = 'microservicios'
             azure.location = 'francecentral'
             azure.admin_username = 'daniel'  
             azure.tcp_endpoints=[22, 80]
