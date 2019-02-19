@@ -2,6 +2,7 @@ package cc.project.busapp.controllers;
 
 import cc.project.busapp.domain.Customer;
 import cc.project.busapp.services.CustomerService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -14,7 +15,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -101,13 +104,22 @@ public class CustomerControllerTest {
 
     }
 
-/*
+
+
+
     @Test
     public void createUser() throws  Exception{
-        Customer customer1 = new Customer();
-        customer1.setName("Customer created");
-        customer1.setUserName("JhonDoes2");
+
+        Customer customer1 = Customer.builder()
+                .userId(1l)
+                .name("Jhon Doe")
+                .userName("admin")
+                .email("admin@admin.com")
+                .password("1234")
+                .roles(Arrays.asList("ROLE_USER", "ROLE_ADMIN"))
+                .build();
         customer1.setEmail("usuario@correo.com");
+
         when(userService.createCustomer(customer1)).thenReturn(customer1);
 
         mockMvc.perform(post(CustomerController.BASE_URL)
@@ -116,6 +128,7 @@ public class CustomerControllerTest {
                 .andExpect(status().isCreated());
 
     }
+
 
     @Test
     public void updateUser() throws Exception {
@@ -149,5 +162,5 @@ public class CustomerControllerTest {
             throw new RuntimeException(e);
         }
     }
-    */
+
 }
