@@ -69,7 +69,15 @@ public class TicketsControllerTest {
                 .quantity(15)
                 .build();
 
-        when(ticketService.getAllTickets()).thenReturn(Arrays.asList(tickets1, tickets1, tickets3));
+        Tickets tickets4 = Tickets.builder()
+                .ticketId(3l)
+                .route("Ruta 3")
+                .busDate(new Date())
+                .price(3.3f)
+                .quantity(15)
+                .build();
+
+        when(ticketService.getAllTickets()).thenReturn(Arrays.asList(tickets1, tickets1, tickets3, tickets4));
 
         mockMvc.perform(get(TicketsController.BASE_URL)
                 .contentType(MediaType.APPLICATION_JSON))
