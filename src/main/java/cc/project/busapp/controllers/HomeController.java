@@ -24,26 +24,13 @@ public class HomeController implements ErrorController {
     public ObjectMapper mapper;
 
 
-    Customer customer1 = Customer.builder()
-            .userId(1l)
-            .name("Jhon Doe")
-            .userName("admin")
-            .email("admin@admin.com")
-            .password("1234")
-            .roles(Arrays.asList("ROLE_USER", "ROLE_ADMIN"))
-            .build();
-
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
     public ObjectNode hello(){
 
-        ObjectNode node2 = mapper.createObjectNode();
-        node2.put("ruta", "/user/1");
-        node2.putPOJO("valor", customer1);
-        ObjectNode objectNode = mapper.createObjectNode();
-        objectNode.put("status", "OK");
-        objectNode.put("ejemplo", node2);
-        return objectNode;
+        ObjectNode node = mapper.createObjectNode();
+        node.put("status", "OK");
+        return node;
     }
 
 
@@ -51,13 +38,9 @@ public class HomeController implements ErrorController {
     @ResponseStatus(HttpStatus.OK)
     public ObjectNode status(){
 
-        ObjectNode node2 = mapper.createObjectNode();
-        node2.put("ruta", "/user/1");
-        node2.putPOJO("valor", customer1);
-        ObjectNode objectNode = mapper.createObjectNode();
-        objectNode.put("status", "OK");
-        objectNode.put("ejemplo", node2);
-        return objectNode;
+        ObjectNode node = mapper.createObjectNode();
+        node.put("status", "OK");
+        return node;
     }
 
     @RequestMapping(value = "/error")
