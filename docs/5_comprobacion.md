@@ -2,8 +2,8 @@
 
 Para comprobar la maquia virtual del compañero  Miguel primero se clona el repositorio con todos los archivos.
 
-La arquitectura del compañero Miguel consisete en dos Servicios que se comunican entre si,  un servicio de información y otro de viajes ,
-el despliegue esta totalmente atomatizado , y solo es necesario ejecutar los comandos de vagrant para poder desplegar
+La arquitectura del compañero Miguel consisete en dos Servicios que se comunican entre si,  un servicio de información y otro de viajes,
+el despliegue esta totalmente atomatizado, y solo es necesario ejecutar los comandos de vagrant para poder desplegar
 la aplicación
 
 ## Pasos para el despliegue
@@ -16,7 +16,7 @@ La siguiete imagen muestra el servicio siendo creado.
 
 ![paso_1](https://user-images.githubusercontent.com/24718808/52013529-92c0ec00-24dd-11e9-8daf-d63100081704.png)
 
-2. Se ejecuta el comando `vagrant up viajes` el cual despliega el otro servicio , ademas ena configuración del script esta
+2. Se ejecuta el comando `vagrant up viajes` el cual despliega el otro servicio, ademas ena configuración del script esta
 el proceso de provisionamiento y despliegue de los archvios ansible.yml. 
 En la siguiente imagen se muestra el resultado de la provision de los servicios viajes e info.
 
@@ -33,7 +33,7 @@ se realiza la prueba del servicio viajes como se muestra en la siguiente pantall
 
 ![servicio_viajes](https://user-images.githubusercontent.com/24718808/52014862-eb45b880-24e0-11e9-9287-01e8029bf357.png)
 
-Ademas como el servicio de información se comunica con el de viajes , se comprueba la dirección `viajes/2` para comprobar 
+Ademas como el servicio de información se comunica con el de viajes, se comprueba la dirección `viajes/2` para comprobar 
 su comportamiento.
 
 ![servicio_informacion](https://user-images.githubusercontent.com/24718808/52014975-319b1780-24e1-11e9-9e23-9dbf2e8f1163.png)

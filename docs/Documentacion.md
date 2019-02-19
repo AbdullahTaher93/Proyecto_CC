@@ -25,8 +25,8 @@
 El proyecto consiste en realizar una aplicación para realizar pagos de tiquetes de buses desde el móvil, con esto el usuario no tendrá que estar recargando 
 las tarjetas de los buses y los conductores no perderán el tiempo en cada estación recargando tarjetas y devolviendo cambio a los usuarios.
 
-Un usuario puede descargar la aplicación en el celular y podrá seleccionar la estación de origen y destino , con esto la aplicación calculara el valor del
-tiquete y le dará una opción de pago al usuario, puede ser tarjeta crédito o con PSE.Luego de que el tiquete sea comprado ,por medio de tecnología NFS lo 
+Un usuario puede descargar la aplicación en el celular y podrá seleccionar la estación de origen y destino, con esto la aplicación calculara el valor del
+tiquete y le dará una opción de pago al usuario, puede ser tarjeta crédito o con PSE.Luego de que el tiquete sea comprado,por medio de tecnología NFS lo 
 presentara para que sea validado y pueda acceder al bus.
 
 <a name="arquitectura"></a>
@@ -40,7 +40,7 @@ Zuul nos ayuda a controlar las peticiones externas de nuestros clientes, colocan
 
 La aplicación se desplegara en diferentes plataformas de servicios Paas como por ejemplo Heroku y azure, la idea es que esta aplicación se pueda desplegar en cualquier nube sin que afecte el rendimiento de la misma. 
 
-Para cada microservicio se utilizará el patrón de una base de datos por microservicio. Ya que la aplicación será desplegada en Heroku la base de datos que se escoger, por ahora se tiene previsto realizar los cuatro microsrvicios en Java ,con el Framerwork Spring Boot.
+Para cada microservicio se utilizará el patrón de una base de datos por microservicio. Ya que la aplicación será desplegada en Heroku la base de datos que se escoger, por ahora se tiene previsto realizar los cuatro microsrvicios en Java,con el Framerwork Spring Boot.
 
 La base de datos para cada microservicio puede variar, sin embargo está pensado que la aplicación maneje las siguientes bases de datos : PostgresSQL, MySql y MongoDB.abitMQ para el manejo y encolamiento de mensajes.
 
@@ -177,7 +177,7 @@ Si se envian los parametros correctos obtenemos el siguiente resultado
 
 ![post_exitoso_usuarios](https://user-images.githubusercontent.com/24718808/52974614-76202180-33c2-11e9-9872-a4b7e0ac3304.png)
 
-Si no se envían los valores obligatorios como userName name o  email , nos muestra la siguiente excepción
+Si no se envían los valores obligatorios como `userName name` o  `email` nos muestra la siguiente excepción
 
 ~~~
 {
@@ -188,7 +188,7 @@ Si no se envían los valores obligatorios como userName name o  email , nos mues
 }
 ~~~
 
-Para actualizar los usuarios con el metodo PUT en la ruta `/user/{usuarioId}` , nos muestra esta imagen si encuentra al usuario y los parametros son exitosos.
+Para actualizar los usuarios con el metodo PUT en la ruta `/user/{usuarioId}`, nos muestra esta imagen si encuentra al usuario y los parametros son exitosos.
 
 
 ![put_ususarios](https://user-images.githubusercontent.com/24718808/52974758-06f6fd00-33c3-11e9-9b82-6314da7c3f05.png)
@@ -233,11 +233,11 @@ Las siguientes Imagenes muestran pruebas funcionales del API Rest del Microservi
 
 #### Obtener Los tiquetes.
 
-En la ruta `/tickets` podemos obtener todos nuestros tiquetes que existen en la aplicación.
+En la ruta `/tickets` podemos obtener todos los tiquetes que existen en la aplicación.
 
 ![get_tiquetes](https://user-images.githubusercontent.com/24718808/52975713-cef1b900-33c6-11e9-9aaf-60608a6468be.png)
 
-para obtener un tiquete individual se puede acceder mediante la ruta `/tickets/{id-tiquete}`, si el tiquete no existe , 
+para obtener un tiquete individual se puede acceder mediante la ruta `/tickets/{id-tiquete}`, si el tiquete no existe, 
 nos muestra el siguiente resultado.
 
 ![tiquete_no_encontrado](https://user-images.githubusercontent.com/24718808/52975904-92728d00-33c7-11e9-8011-0d670e62c7de.png)
@@ -248,10 +248,10 @@ nos muestra el siguiente resultado.
 ### Microservicio de Compra de tiquetes
 
 El microservicio de gestión de compras de tiquetes es el encargado de la realización de la venta de tiquetes para los usuarios, 
-los datos necesarios son , el ID del usuario el cual va a comprar el tiquete, el ID del tiquete y la cantidad de tiquetes a comprar.
+los datos necesarios son, el ID del usuario el cual va a comprar el tiquete, el ID del tiquete y la cantidad de tiquetes a comprar.
 
 También este servicio válida si existen los suficientes tiquetes en inventario para la realización de la compra.
-Finalmente  muestra las compras que se han hecho de los tiquetes los datos que muestra son,  el ID de la compra , el ID y el nombre del cliente , la ruta del bus, el precio por unidad de cada tiquete, la cantidad de tiquetes  comprados y el precio total de los tiquetes.
+Finalmente  muestra las compras que se han hecho de los tiquetes los datos que muestra son,  el ID de la compra, el ID y el nombre del cliente, la ruta del bus, el precio por unidad de cada tiquete, la cantidad de tiquetes  comprados y el precio total de los tiquetes.
 
 
 Su API rest es:
@@ -276,7 +276,7 @@ para obtener las compras hechas es necesario hacer una petición get a la siguie
 
 #### Realizar una Compra
 
-Para realizar una compra es necesario hacer un POST a la ruta `/compras/{id-usuario}/{id-tiquete}/cantidad` , estos parámetros deben ser números enteros, además
+Para realizar una compra es necesario hacer un POST a la ruta `/compras/{id-usuario}/{id-tiquete}/cantidad`, estos parámetros deben ser números enteros, además
 el servicio permite calcular el precio de la compra, resta tiquetes de la base de datos y valida si la cantidad de tiquetes a comprar
 es mayor que la existente.
 
@@ -287,21 +287,21 @@ Si la compra se realiza con éxito nos muestra el siguiente resultado
 
 Si el usuario o tiquetes no existen se muestran errores como los anteriormente mencionados cuando un tiquete o un usuario no existen en el sistema.
 
-Si la cantidad de tiquetes que se desea comprar es mayor a la que existe, se muestra el siguiente error.
+Si la cantidad de tiquetes que se desea comprar es mayor a la existente se muestra el siguiente error.
 
 ![compra_fallo](https://user-images.githubusercontent.com/24718808/52977332-27c45000-33cd-11e9-8f68-8ab7f9639b35.png)
 
 
 <a name="lombok"></a>
-#### Project Lombok
+### Project Lombok
 
-[Project Lombok](https://projectlombok.org/),  es una libreria la cual se instala en el editor de texto favorito , y se utiliza para no tener que crear los getters setters y constructores
+[Project Lombok](https://projectlombok.org/),  es una libreria la cual se instala en el editor de texto favorito, y se utiliza para no tener que crear los getters setters y constructores
 para cada uno de los POJOS creados, los beneficios de utilizar esta librería son el ahorro de tiempo en creación de Getter, Setters Constructores, toString o hasEquals y además
 el código de cada clase se ve mucho más limpio y claro.
 
 En nuestro sistema se utilizan las siguientes etiquetas
   
-  - @Data: etiqueta utilizada para crear los getters y setters, el constructor obligatorio, se crea el método toString , el equals y hashCode , muy importantes para el trabajo con objetos.
+  - @Data: etiqueta utilizada para crear los getters y setters, el constructor obligatorio, se crea el método toString, el equals y hashCode, muy importantes para el trabajo con objetos.
   - @Builder: Esta etiqueta nos genera código para poder utilizar el patrón Builder el cual hace que la construcción de objetos sea más sencilla
   - @NoArgsConstuctos : nos genera un constructor por defecto el cual es necesario para utilizar el JPA correctamente.
 
@@ -310,7 +310,7 @@ En nuestro sistema se utilizan las siguientes etiquetas
 #### Creación de datos Inicio Aplicación (Bootstraping)
 
 Para realizar la creacion de datos de prueba en cada microservicio se realiza en la clase [Bootstrap.java](https://github.com/danielbc09/Proyecto_CC/blob/master/src/main/java/cc/project/busapp/bootstrap/Bootstrap.java) el ingreso de los datos de la aplicación. Esta clase como podemos ver implemente `CommandLineRunner` lo cual hace que 
-esta clase se la primera en ejecutarse despues de haber cargado la aplicación , En ella se crean los primeros datos de prueba  para la aplicación.
+esta clase se la primera en ejecutarse despues de haber cargado la aplicación, En ella se crean los primeros datos de prueba  para la aplicación.
 
 Como se puede ver en la siguiente linea de codigo de ejemplo, para cada objeto creado se utiliza su respectivo repositorio, el cual mediante JPA de java guarda el dato en la base de datos que 
 se tenga configurada.
@@ -326,7 +326,7 @@ se tenga configurada.
                             .build());
 ~~~
 
-Lo que hace el anterior pedazo de código , es utilizar el repositorio `customerRepository` para guardar un objeto Customer , creado utilizando el patrón de diseño builder con ayuda de la librería Lombok
+Lo que hace el anterior pedazo de código, es utilizar el repositorio `customerRepository` para guardar un objeto Customer, creado utilizando el patrón de diseño builder con ayuda de la librería Lombok
 que se hablará más tarde.
 
 Finalmente en la siguiente pedazo de código la aplicación ejecuta los metodos de creación y de usuarios y tiquetes.
@@ -339,23 +339,23 @@ Finalmente en la siguiente pedazo de código la aplicación ejecuta los metodos 
 
 ~~~
 
-Cabe destacar , que estos datos se guardan en la base de datos la cual se haya configurado , ya sea postgresql en nuestro caso o cualquier otra.
+Cabe destacar, que estos datos se guardan en la base de datos la cual se haya configurado, ya sea postgresql en nuestro caso o cualquier otra.
 
 <a name="manejo-errores"></a>
 ## Manejo de Errores
 
 
-Para el manejo de errores de los microservicios  se crea el paquete de errores en el cual tenemos definido dos clases DirectionNotFountException.java  y ResourceNotFoundException,.java las cuales básicamente manejan los errores más generales de la aplicación.
+Para el manejo de errores de los microservicios  se crea el paquete de errores en el cual tenemos definido dos clases DirectionNotFountException.java  y ResourceNotFoundException.java las cuales básicamente manejan los errores más generales de la aplicación.
 
 El error DirectionNotFoundException se lanza cuando no se encuentra una ruta en la aplicación.
 
-El error ResourceNotFoundException se lanza cuando un recurso , ya sea un usuario o tiquete no existen.
+El error ResourceNotFoundException se lanza cuando un recurso, ya sea que un usuario o tiquete no existan.
 
 La clase PojoExceptionResponse.java es un Pojo el cual es utilizado para la personalización de los mensajes de errores  con el objetivo que el usuario final vea de una forma amigable errores de usuario.
 
-Finalmente para la intercepción y respuesta de los errores la clase se utiliza la clase RestResponseEntityExceptionHandler.java , en el ambiente de spring es una forma muy general de manejar errores , por lo tanto se crean estas clases adaptándolas a  nuestras necesidades basadas en las prácticas generales. 
+Finalmente para la intercepción y respuesta de los errores la clase se utiliza la clase RestResponseEntityExceptionHandler.java, en el ambiente de spring es una forma muy general de manejar errores por lo tanto se crean estas clases adaptándolas a  nuestras necesidades basadas en las prácticas generales. 
 
-La clase RestResponseEntityExceptionHandler.java esta constituida por un `@RestControllerAdvice` el cual es un decorador que le indica al framework spring el tipo de componente que es la clase , además se ejecuta si  los errores definidos en la clase son lanzados por cualquier servicio.Por ejemplo en el siguiente pedazo de código se lanza un error de tipo ResourceNotFoundException si no se encuentra un usuario con el Id especificado. Este error va a ser respondido por el controlador “RestResponseEntityExceptionHandler.java”
+La clase RestResponseEntityExceptionHandler.java esta constituida por un `@RestControllerAdvice` el cual es un decorador que le indica al framework spring el tipo de componente que es la clase, además se ejecuta si  los errores definidos en la clase son lanzados por cualquier servicio.Por ejemplo en el siguiente pedazo de código se lanza un error de tipo ResourceNotFoundException si no se encuentra un usuario con el Id especificado. Este error va a ser respondido por el controlador “RestResponseEntityExceptionHandler.java”
 
 ~~~
 

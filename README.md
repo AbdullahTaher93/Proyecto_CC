@@ -59,10 +59,10 @@ Para mas información sobre por favor dirjase al siguiente [link](https://github
 
 ## Orquestación Con Vagrant
 
-Despliegue Vagrant: 40.89.155.92
+Despliegue Vagrant: 40.89.155.201
 
 
-Para mas información del  despliegue con vagrant por favor dirijase a este [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_orquestacion.md).
+Para mas información del  despliegue con vagrant por favor diríjase a este [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_orquestacion.md).
 
 Se ha comprobado la orquestación de El compañero Miguel gonCalves en el [siguiente documento](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_comprobacion.md).
 

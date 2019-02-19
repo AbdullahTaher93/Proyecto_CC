@@ -2,7 +2,7 @@
 
 En este hito se utilizó ansible para aprovisionar la base de datos postgresql.
 
-Además se avanza en la creación de los Microservicios de Tiquetes y De compras de tiquetes, además se realiza una refactorización al servicio de
+Además se avanza en la creación de los Microservicios de Tiquetes y de compras de tiquetes y se realiza una refactorización al servicio de
 usuarios.
 
 
