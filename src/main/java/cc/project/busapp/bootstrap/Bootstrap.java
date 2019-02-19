@@ -6,6 +6,7 @@ import cc.project.busapp.repositories.CustomerRepository;
 import cc.project.busapp.repositories.TicketsRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.Date;
 

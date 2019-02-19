@@ -1,7 +1,6 @@
 package cc.project.busapp.controllers;
 
 
-import cc.project.busapp.domain.Customer;
 import cc.project.busapp.errors.DirectionNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Arrays;
 
 
 @RestController
