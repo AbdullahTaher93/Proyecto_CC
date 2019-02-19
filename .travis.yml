@@ -1,2 +1,5 @@
 language: java
 jdk: oraclejdk8
+script:
+- sudo mvn clean package
+- sudo mvn installgit s
