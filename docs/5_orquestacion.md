@@ -1,26 +1,26 @@
 # Aprovisionamiento Máquinas Virtuales Con Vagrant
 
-En este Hito se utilizó vagrant para orquestar dos máquinas virtuales, el servicio de usuarios y su respectiva base de datos Postgres.
+En este Hito se utilizó vagrant para orquestar dos máquinas virtuales, una es donde se despliegan los Microservicios de la aplicación y en la otra está su respectiva base de datos Postgres.
 
-Para la orquestación de estas dos máquinas se utiliza como ya se mencionó vagrant el cual como se puede ver en la [documentación](https://www.vagrantup.com/), es una herramienta para construir y gestionar entornos de máquinas virtuales con el objetivo de automatizar la creación y despliegue de máquinas virtuales.
+Para la orquestación de estas dos máquinas virtuales en azure  vagrant es la herramienta ideal como se puede ver en la [documentación](https://www.vagrantup.com/), pues nos ayuda a construir y gestionar entornos de máquinas virtuales con el objetivo de automatizar su creación y despliegue.
 
 ## Selección Máquinas virtuales.
 
-Se realizó el microservicio en la versión de Ubuntu 18.04-LTS,  por razones como el conocimiento de este servidor y sus comandos,  algo muy importante para optimizar el tiempo en despliegue con ansible.
+Se realizó el microservicio en la versión de Ubuntu 18.04-LT por razones como el conocimiento de este servidor y sus comandos, algo muy importante para optimizar el tiempo en despliegue con ansible.
 
-Para la base de datos se utiliza un un servidor Ubuntu 18.04-LTS como base  con el objetivo de realizar el aprovisionamiento de la base de datos con ansible.
+Para la base de datos se utiliza un un servidor Ubuntu 18.04-LTS como imagen base con el objetivo de realizar el aprovisionamiento con ansible.
 
-Como se puede ver en la siguiente encuesta de la [documentación](https://www.postgresql.org/community/survey/50-what-operating-system-is-your-primarylargest-production-postgresql-database-running-on/) los servidores Ubuntu son los mas utilizados para el ambiente de producción 
+Como se puede ver en la siguiente encuesta de la [documentación](https://www.postgresql.org/community/survey/50-what-operating-system-is-your-primarylargest-production-postgresql-database-running-on/) de postgresql los servidores Ubuntu son los mas utilizados para el ambiente de producción 
 
-Además en el siguiente [enlace](https://redbyte.eu/en/blog/postgresql-benchmark-freebsd-centos-ubuntu-debian-opensuse/) se muestra varias pruebas  de latencia  (TPS ) para la base de datos postgres con diferentes sistemas operativos y en operaciones como lectura escritura en la base de datos y se concluye que no hay una diferencia significativa entre varias distribuciones GNU/Linux.
+Además en el siguiente [enlace](https://redbyte.eu/en/blog/postgresql-benchmark-freebsd-centos-ubuntu-debian-opensuse/) se muestra varias pruebas  de latencia  (TPS ) para la base de datos postgresql desplegada en diferentes sistemas operativos haciendo transacciones de lectura y  escritura en la base de datos, se concluye que no hay una diferencia significativa entre las diferentes distribuciones GNU/Linux.
 
-En cuanto a la capacidad de ambas máquinas se escoge el Básico A0 pues estas características son lo suficientemente potentes para soportar nuestros servicios , por otro lado son los más económicos como se puede observar en la siguiente imagen. 
+En cuanto a la capacidad de ambas máquinas se escoge el Básico A0, pues estas características son lo suficientemente potentes para soportar nuestros servicios adémas que  son mas económicos como se puede observar en la siguiente imagen. 
 
 ![basico_a0](https://user-images.githubusercontent.com/24718808/51792589-92f67a00-21b3-11e9-9f04-1136117ca0c7.png)
 
 ## Azure y Vagrant
 
-Existen diferentes formas de orquestar la infraestructura de aplicaciones en azure como por ejemplo con la consola de comandos de cliente azure o la interfaz web, para este hito sin embargo se utilizó vagrant.
+Existen diferentes formas de orquestar la infraestructura de aplicaciones en azure como por ejemplo, la consola de comandos de cliente azure o la interfaz web.Para este hito sin embargo se utilizó vagrant.
 
 Con el objetivo de utilizar vagrant junto con azure es necesario instalar el siguiente  plugin de vagrant que está en el siguiente [Link](https://github.com/Azure/vagrant-azure). Mediante  este plugin podemos acceder al API de azure con vagrant.
 
@@ -57,13 +57,13 @@ Después de haber creado el  AAD podemos ver los atributos necesarios para la co
 }
 ~~~ 
 
-Además se necesita el Id de la Suscripción de Azure el cual lo podemos obtener con el siguiente comando:
+Además los atributos anteriores se necesita el Id de la Suscripción de Azure el cual lo podemos obtener con el siguiente comando:
 
 ~~~
 az account list --query "[?isDefault].id" -o tsv
 ~~~
 
-Finalmente con las variables anteriores se crea en nuestro sistema operativo las variables de entorno para utilizarlas en el Vagrantfile y con estas credenciales se vagrant se pueda conectar al API de azure.
+Finalmente con las credenciales anteriores se crea en nuestro sistema operativo las variables de entorno para utilizarlas en el Vagrantfile y para que Vagrant se pueda conectar al API de azure.
 
 ~~~
 export AZURE_TENANT_ID=XXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -82,7 +82,7 @@ A continuación la estructura del documento con su explicación.
 ##Se inicia el vagrant file para configurar el servicio
 Vagrant.configure('2') do |config|
 
-  ## Se descarga la imagen azure
+  ## Se descarga la imagen azure Dummy
   config.vm.box = 'azure'
  ## Se configura la clave privada para de nuestro equipo	
   config.ssh.private_key_path = '~/.ssh/id_rsa'
@@ -98,24 +98,24 @@ Vagrant.configure('2') do |config|
           azure.client_secret = ENV['AZURE_CLIENT_SECRET']
           azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']  
         
-##Se define el grupo de la máquina virtual.
+      #Se define el grupo de la máquina virtual.
           azure.resource_group_name = 'CChito5' 
-#Se define la imagen de la maquina virtual.
+      #Se define la imagen de la maquina virtual.
           azure.vm_image_urn = 'Canonical:UbuntuServer:18.04-LTS:latest'
-#Se define el nombre de la máquina virtual.          
+      #Se define el nombre de la máquina virtual.          
           azure.vm_name = 'posgresql'
-#Se define las características físicas de las máquinas virtuales
+      #Se define las características físicas de las máquinas virtuales
           azure.vm_size = 'Basic_A0'
-#Se define la región donde se desplegará la maquina
+      #Se define la región donde se desplegará la maquina
           azure.location = 'francecentral'
-#Se define el nombre de usuario
+      #Se define el nombre de usuario
           azure.admin_username = 'daniel'
-#Se abren los puertos , para acceder a la máquina virtual , el 5432 es el de la base de datos postgreSql por defecto.
+      #Se abren los puertos , para acceder a la máquina virtual , el 5432 es el de la base de datos postgreSql por defecto.
           azure.tcp_endpoints = [22, 80, 5432]
       end 
  
-# Se realiza la provisión con el playbook de ansible provision_db.yml
 
+# Se realiza la provisión con el playbook de ansible provision_db.yml
       database.vm.provision 'ansible' do |ansible|
             ansible.playbook = 'provision_bd.yml'
       end
@@ -128,27 +128,32 @@ Vagrant.configure('2') do |config|
 
       servicio.vm.provider :azure do |azure, override|
 	
-#Credenciales.
-
+            #Se configuran los parámetros credenciales para que Vagrant se pueda conectar a azure
             azure.tenant_id = ENV['AZURE_TENANT_ID']
             azure.client_id = ENV['AZURE_CLIENT_ID']
             azure.client_secret = ENV['AZURE_CLIENT_SECRET']
             azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']     
       
-#valores de nuestra máquina servicio igual que la anterior      
+            #valores de nuestra máquina servicio igual que la anterior 
+
+            #Se define el grupo de la máquina virtual
             azure.resource_group_name = 'CChito5'
+            #Se define el tamaño de los discos de la maquina virtual.
             azure.vm_size = 'Basic_A0'
+            #Se define la maquina virtual.
             azure.vm_image_urn = 'Canonical:UbuntuServer:18.04-LTS:latest'      
+            #Se define el nombre de la maquina virtual.
             azure.vm_name = 'serviciousuarios'
+            #Se define la localización.
             azure.location = 'francecentral'
+            #se Crea  el administrador daniel de la maquina
             azure.admin_username = 'daniel' 
  
-	#Se abren los puertos 22 y 80 para poder acceder a la Máquina.
-
+	#Se abren los puertos 22 y 80 para poder acceder a la Máquina de virtual
             azure.tcp_endpoints=[22, 80]
       end
         
-	#Se aprovisiona la máquina con el playbook provision.yml
+	##Se aprovisiona la máquina con el playbook provisión.yml el cual instala todo lo necesario para crear la base de datos
       servicio.vm.provision 'ansible' do |ansible|
           ansible.playbook = 'provision.yml'
       end
@@ -174,7 +179,7 @@ vagrant up --no-parallel
 
 ~~~
 
-Como podemos ver en la siguiente imagen , se puede ver la creación de las dos máquinas virtuales.
+Como podemos ver en la siguiente imagen, se puede ver la creación de las dos máquinas virtuales.
 
 
 ![vagrant_evidencia](https://user-images.githubusercontent.com/24718808/51792724-b7535600-21b5-11e9-9bc9-e7bd9de60326.png)
@@ -192,7 +197,7 @@ y se ejecuta el comando:
 ~~~
 mvn spring-boot:run
 ~~~
-Como se puede ver en la siguiente imagen la máquina virtual del servidor , responde exitosamente
+Como se puede ver en la siguiente imagen la máquina virtual del servidor, responde exitosamente
 
 ![prueba_exito](https://user-images.githubusercontent.com/24718808/51792699-46ac3980-21b5-11e9-9993-c385f21a82d2.png)
 

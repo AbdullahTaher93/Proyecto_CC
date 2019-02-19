@@ -49,9 +49,9 @@ La siguiente imagen muestra el build exitoso en travis CI , para mas informaciń
 
 ### Heroku 
 
-En Heroku se configura una instancia de la aplicación mas un add-ons de bases de datos postgreSQL como lo muestra la siguiente imagen:
+En Heroku se configura una instancia de la aplicación mas un add-ons de bases de datos postgreSql como lo muestra la siguiente imagen:
 
-![heroku_postgress](https://user-images.githubusercontent.com/24718808/49340543-74578500-f641-11e8-83c1-4a3db11da5ee.png)
+![heroku_postgreSql](https://user-images.githubusercontent.com/24718808/49340543-74578500-f641-11e8-83c1-4a3db11da5ee.png)
 
 
 para que la aplicación se pueda conectar a la base de datos , se raliza una configuración en el archivo [aplication.properties del](https://github.com/danielbc09/Proyecto_CC/blob/master/src/main/resources/application.properties) proyecto de las variables de entorno:

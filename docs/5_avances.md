@@ -1,7 +1,6 @@
 # Avances Hito 5
 
-Para este hito se decide realizar un archivo de proviciónamiento para la base de datos postgreSql, para poder instalar y crear 
-una base de datos y el usuario autorizado y que nuestro servicio de usuarios se pueda conectar con la base de datos.
+En este hito se utilizó ansible para aprovisionar la base de datos postgresql.
 
 Además se avanza en la creación de los Microservicios de Tiquetes y De compras de tiquetes, además se realiza una refactorización al servicio de
 usuarios.
@@ -15,6 +14,10 @@ Para consultar los servicios creados y su explicación por favor dirigirse a los
   - [Microservicio Tiquetes](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#tiquetes)
   - [Microservico Compras de tiquetes](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#compra)
 
+
+
+
+## Aprovisionamiento base de datos con Ansible
 
 ### Explicación Script: 
 
@@ -30,11 +33,11 @@ Para consultar los servicios creados y su explicación por favor dirigirse a los
 
 ~~~
 
-En la tarea "Install PostgreSql" se instala la base de datos postgres con los paquetes -python-psycopg2 y el -libpq-dev
+En la tarea "Install PostgreSql" se instala la base de datos postgresql con los paquetes -python-psycopg2 y el -libpq-dev
 
 ### 2 Creación base de datos y ususario.
 
-En la siguiente parte del script se definen las variables de la base de datos `ccproject` con sus respectivos usuarios
+En la siguiente parte del script se definen las variables de la base de datos `ccproject` con sus respectivo usuario y contraseña.
 
 ~~~
 vars:
@@ -43,11 +46,11 @@ vars:
       dbpassword: "{{lookup('env','AZ_DATABASE_PASSWORD')}}"
 ~~~
 
-se utilizan variables de entorno del sistema operativo para generar estas credenciales  de usauriop y password de una forma 
+Se utilizan variables de entorno del sistema operativo para crear las credenciales de usuario y password de una forma 
 segura con la instrucción de ansible `lookup('env', {variable de entorno})`. 
 
 
-Para crear la base de datos se ejecutan los siguiente instrucciones.
+Para crear la base de datos se ejecutan las siguiente instrucciones.
 ~~~
        - name: assure database creation
         postgresql_db: name={{dbname}}
@@ -55,15 +58,14 @@ Para crear la base de datos se ejecutan los siguiente instrucciones.
       - name: assure user has the acces to database
         postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL
 ~~~
-ademas en la instrucción "assure user has the acces to databae" nos aseguramos y le damos permiso a el usuario que tenga 
-acceso a la base de datos con su respectivo password.
+En la instrucción "assure user has the acces to databae" nos aseguramos que el usuario tenga acceso a la base de datos.
 
 
 ### 3 Asegurando acceso al servicio postgres
 
-Ya habiendo creado la base de datos con su usuario respectivo , se procede a configurar dos valores inportantes para postgreSql
-que son el acceso a los puertos y tambien se configura el documento pg_hba.conf para poder ingresar a la base de datos.
-Ya que postgres es restrictivo en cuanto la instalación y configuraciones por defecto.
+Habiendo creado la base de datos con su respectivo usuario, se procede a configurar dos valores importantes para postgresql los cuales son 
+el acceso a los puertos, tambien se configura el documento pg_hba.conf para poder ingresar a la base de datos ya que postgresql es restrictivo 
+en cuanto al ingreso de usuarios externos.
 
 ~~~
       
@@ -82,15 +84,14 @@ Ya que postgres es restrictivo en cuanto la instalación y configuraciones por d
 
 ~~~
 
-En la tarea postgresql listen all ports , se configura para que postgres escuche las peticiones desde cualquier maquina con cualquier ip.
+En la tarea `postgresql listen all ports` se configura los puertos para que postgresql escuche las peticiones desde cualquier maquina con cualquier ip.
 
-La tarea postgresql should allow access to host se configura el acceso a los usuarios de la base de datos , ya que por defecto 
-postgrs no deja conectar a ningún usuario así ya estuviera creado.
+Con la tarea `postgresql should allow access to host` se configura el acceso a los usuarios de la base de datos, ya que por defecto 
+postgresql no deja conectar a ningún usuario.
 
 ### 4 Re iniciar servicio postgresql
 
-
-Para esta tarea se realiza el siguiente instrucción:
+En esta tarea se realiza la siguiente instrucción:
 
 ~~~
      - name: Stop postgreSql
@@ -101,12 +102,12 @@ Para esta tarea se realiza el siguiente instrucción:
           state: restarted  
 ~~~
 
-Se utilizo esta instrucción sin ningun exit, pues la base de datos no realiza el reinicio y no da el siguiente error:
+Se utilizó esta instrucción sin ningún éxito pues la base de datos no realiza el reinicio y nos da el siguiente error:
 
 ![error_postgresyml](https://user-images.githubusercontent.com/24718808/52016628-601af180-24e5-11e9-8e9a-7a426c41045c.png)
 
-ademas dado el tiempo buscando y cambiando de instrucciones por ejemplo con stop , o enviar el comando directamente con sudo ,
-se tuvo que dejar para una posterior entrega el arreglo de este error.
+Se intentó cambiar al modo de comandos con ansible pero aun así no dio resultado.
+
 
 ### 5 Fuentes 
 
