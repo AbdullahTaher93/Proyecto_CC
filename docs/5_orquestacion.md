@@ -8,7 +8,7 @@ Para la orquestación de estas dos máquinas virtuales en azure  vagrant es la h
 
 ### Máquina Servicios
 
-Se realizó el microservicio en la versión de Ubuntu 18.04-LTS, ya que ubuntu es uno servidores mas recomendado en el entorno libre y empresarial como se puede ver [aquí](https://www.colocationamerica.com/blog/best-operating-systems-for-business-and-personal-use), los servidores Ubuntu son economicamente escalables, y seguros , ademas 
+Se realizó el microservicio en la versión de Ubuntu 18.04-LTS, ya que ubuntu es uno servidores mas recomendado en el entorno libre y empresarial como se puede ver [aquí](https://www.colocationamerica.com/blog/best-operating-systems-for-business-and-personal-use), los servidores Ubuntu son economicamente escalables, seguros y ademas 
 soportan hardware y software mas popular como se puede ver [aquí](https://techglamour.com/server-operating-system/).
 
 Tomando otras fuentes, como la siguiente [link](https://www.ubuntupit.com/best-linux-server-distro-top-10-compared-recommendation/) se puede ver que recomiendan la versión de Debian sobre otras versiones Linux, pues según el artículo tiene caracteristicas como estabilidad, compatibilidad, facil uso e integración alta.
@@ -122,7 +122,7 @@ Vagrant.configure('2') do |config|
           azure.location = 'francecentral'
       #Se define el nombre de usuario
           azure.admin_username = 'daniel'
-      #Se abren los puertos , para acceder a la máquina virtual , el 5432 es el de la base de datos postgreSql por defecto.
+      #Se abren los puertos, para acceder a la máquina virtual, el 5432 es el de la base de datos postgreSql por defecto.
           azure.tcp_endpoints = [22, 80, 5432]
       end 
  
@@ -134,7 +134,7 @@ Vagrant.configure('2') do |config|
   end
 
 
-# Se realiza la configuración de la máquina virtual servicio , donde se desplegará nuestro microservicio.
+# Se realiza la configuración de la máquina virtual servicio, donde se desplegará nuestro microservicio.
 
   config.vm.define 'servicio' do |servicio|
 
