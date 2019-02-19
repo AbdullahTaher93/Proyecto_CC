@@ -221,7 +221,7 @@ Como se puede ver en la siguiente imagen la máquina virtual del servidor respon
 ### Microservicio Usuarios
 
 Para el microservicio de usuarios se realiza la prueba de obtener usuarios y crear usuarios, para más información sobre este microservicio
-dirijase al siguiente [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#usuarios)
+diríjase al siguiente [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#usuarios)
 
 Al dirigirse  a la dirección `http://40.89.155.201/user` se pueden ver los usuarios.
 
@@ -233,7 +233,7 @@ Con la herramienta Postman se realiza un post para crear el usuario.
 
 ### Microservicio Tiquetes
 
-Para ver el funcionamiento de este microservicio dirijase a la [documentación](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#tiquetes)
+Para ver el funcionamiento de este microservicio diríjase a la [documentación](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#tiquetes)
 
 Se realiza un get para obtener los tiquetes
 
@@ -242,7 +242,7 @@ Se realiza un get para obtener los tiquetes
 
 ### Microservicio Compras
 
-Para ver el funcionamiento de este microservicio dirijase a la [documentación](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#compra)
+Para ver el funcionamiento de este microservicio diríjase a la [documentación](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#compra)
 
 Se realiza una petición POST para realizar una compra válida:
 
@@ -261,10 +261,10 @@ Finalmente la siguiente imagen muestra las tablas creadas en la base de datos.
 
 ![dbeaver_2](https://user-images.githubusercontent.com/24718808/53006074-d0f26100-3434-11e9-88a1-1a58daf80783.png)
 
-Para mas información sobre como se realiza la conexión a la base de datos dirjase al siguiente [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#base-datos). 
+Para mas información sobre como se realiza la conexión a la base de datos diríjase al siguiente [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#base-datos). 
 
 
-##Referencias
+## Referencias
 
 - http://jj.github.io/CC/documentos/temas/Orquestacion
 - http://www.vagrantbox.es/
