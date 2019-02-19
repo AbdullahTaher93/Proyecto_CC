@@ -21,8 +21,7 @@ las tarjetas de los buses y los conductores no perderán el tiempo en cada estac
 [mas Información del proyecto:](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#descripcion)
 ## Definición de Arquitectura
 
-El proyecto se desarrollara con una arquitectura distribuida de Microservicios. Estos microservicios se 
-desarrollaran en el lenguaje Java con el Framerwork Spring Boot.
+El proyecto se utiliza  una arquitectura distribuida de Microservicios. Estos microservicios se  desarrollaran en el lenguaje Java con el Framerwork Spring Boot.
     
    
 [mas Información de la arquitectura del proyecto:](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#arquitectura)
@@ -60,14 +59,14 @@ Para mas información sobre por favor dirjase al siguiente [link](https://github
 
 ## Orquestación Con Vagrant
 
-Despliegue Vagrant: 40.89.154.93
+Despliegue Vagrant: 40.89.155.92
 
 
-Para mas información para el despliegue con vagrant por favor dirijase a este [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_orquestacion.md).
+Para mas información del  despliegue con vagrant por favor dirijase a este [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_orquestacion.md).
 
-Se ha comprobado la orquestación de EL compañero Miguel gonCalves en el [siguiente documento](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_comprobacion.md).
+Se ha comprobado la orquestación de El compañero Miguel gonCalves en el [siguiente documento](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_comprobacion.md).
 
-El compañero Miguel ha comprobado mi orquestación , para más información dirigirse a el siguiente [link](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_2.md).
+El compañero Miguel ha comprobado mi orquestación, para más información dirigirse a el siguiente [link](https://github.com/migueldgoncalves/CCproj_1819/blob/master/docs/Comprobacion_Hito5/comprobacion_provisionamiento_MiguelGoncalves_2.md).
 
 Los avances del Hito 5 estan en el siguiente [documento](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/5_avances.md).
 

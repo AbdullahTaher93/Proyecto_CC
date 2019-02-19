@@ -6,13 +6,25 @@ Para la orquestación de estas dos máquinas virtuales en azure  vagrant es la h
 
 ## Selección Máquinas virtuales.
 
-Se realizó el microservicio en la versión de Ubuntu 18.04-LT por razones como el conocimiento de este servidor y sus comandos, algo muy importante para optimizar el tiempo en despliegue con ansible.
+### Máquina Servicios
+
+Se realizó el microservicio en la versión de Ubuntu 18.04-LTS, ya que ubuntu es uno servidores mas recomendado en el entorno libre y empresarial como se puede ver [aquí](https://www.colocationamerica.com/blog/best-operating-systems-for-business-and-personal-use), los servidores Ubuntu son economicamente escalables, y seguros , ademas 
+soportan hardware y software mas popular como se puede ver [aquí](https://techglamour.com/server-operating-system/).
+
+Tomando otras fuentes, como la siguiente [link](https://www.ubuntupit.com/best-linux-server-distro-top-10-compared-recommendation/) se puede ver que recomiendan la versión de Debian sobre otras versiones Linux, pues según el artículo tiene caracteristicas como estabilidad, compatibilidad, facil uso e integración alta.
+
+La version 18.04 LTS se escogé por el soporte,  ya que es un soporte a largo plazo y ha mejorado la optimización y seguridad del sistema operativo como puede verse en la documentación [oficial](https://wiki.ubuntu.com/BionicBeaver/ReleaseNotes).
+
+Otra razón importante es  el conocimiento de este servidor sistema operativo para optimizar el tiempo de despliegue ya que se tiene conocimiento en los comandos de esta versión.
+
+
+### Máquina Base De Datos
 
 Para la base de datos se utiliza un un servidor Ubuntu 18.04-LTS como imagen base con el objetivo de realizar el aprovisionamiento con ansible.
 
 Como se puede ver en la siguiente encuesta de la [documentación](https://www.postgresql.org/community/survey/50-what-operating-system-is-your-primarylargest-production-postgresql-database-running-on/) de postgresql los servidores Ubuntu son los mas utilizados para el ambiente de producción 
 
-Además en el siguiente [enlace](https://redbyte.eu/en/blog/postgresql-benchmark-freebsd-centos-ubuntu-debian-opensuse/) se muestra varias pruebas  de latencia  (TPS ) para la base de datos postgresql desplegada en diferentes sistemas operativos haciendo transacciones de lectura y  escritura en la base de datos, se concluye que no hay una diferencia significativa entre las diferentes distribuciones GNU/Linux.
+Además en el siguiente [enlace](https://redbyte.eu/en/blog/postgresql-benchmark-freebsd-centos-ubuntu-debian-opensuse/) se muestra varias pruebas  de latencia  (TPS ) para la base de datos postgresql desplegada en diferentes sistemas operativos haciendo transacciones de lectura y  escritura en la base de datos y se concluye que no hay una diferencia significativa entre las diferentes distribuciones GNU/Linux.
 
 En cuanto a la capacidad de ambas máquinas se escoge el Básico A0, pues estas características son lo suficientemente potentes para soportar nuestros servicios adémas que  son mas económicos como se puede observar en la siguiente imagen. 
 
@@ -193,18 +205,73 @@ JDBC_DATABASE_URL=direccion bd
 JDBC_DATABASE_USERNAME=ususario
 DBC_DATABASE_PASSWORD=clave cualquiera
 ~~~
-y se ejecuta el comando:
+se ejecuta el comando:
+
 ~~~
-mvn spring-boot:run
+sudo mvn spring-boot:run
 ~~~
-Como se puede ver en la siguiente imagen la máquina virtual del servidor, responde exitosamente
 
-![prueba_exito](https://user-images.githubusercontent.com/24718808/51792699-46ac3980-21b5-11e9-9993-c385f21a82d2.png)
+## Evidencias 
 
-Además para probar la conexión a la base de datos se utilizó la herramienta [DBeaver](), como se muestra en la siguiente imagen se configuran los parámetros de nuestra base de datos dirección Ip, puerto, Usuario y contraseña
+Como se puede ver en la siguiente imagen la máquina virtual del servidor responde exitosamente
 
-![dbeaver_conection](https://user-images.githubusercontent.com/24718808/51792750-42345080-21b6-11e9-8c79-5fab8dd6a7e3.png)
+![evidencia_hito5_home](https://user-images.githubusercontent.com/24718808/53003693-d39e8780-342f-11e9-868c-fe4d074f738f.png)
 
-Y nuestra conexión es un éxito como podemos ver en la siguiente imagen , muestra la base de datos “ccproject”con las tablas creadas por el ORM Spring automáticamente.
 
-![dbeaver_2](https://user-images.githubusercontent.com/24718808/51792755-4fe9d600-21b6-11e9-8bb8-23ddcc045a38.png)
+### Microservicio Usuarios
+
+Para el microservicio de usuarios se realiza la prueba de obtener usuarios y crear usuarios, para más información sobre este microservicio
+dirijase al siguiente [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#usuarios)
+
+Al dirigirse  a la dirección `http://40.89.155.201/user` se pueden ver los usuarios.
+
+![get_users](https://user-images.githubusercontent.com/24718808/53004341-43614200-3431-11e9-857d-c22eaf295b53.png)
+
+Con la herramienta Postman se realiza un post para crear el usuario.
+
+![creacion_usuario_nube](https://user-images.githubusercontent.com/24718808/53005180-fda57900-3432-11e9-9c68-d57b129d50f9.png)
+
+### Microservicio Tiquetes
+
+Para ver el funcionamiento de este microservicio dirijase a la [documentación](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#tiquetes)
+
+Se realiza un get para obtener los tiquetes
+
+![get_compras](https://user-images.githubusercontent.com/24718808/53004909-68a28000-3432-11e9-97e5-ae85a97307b8.png)
+
+
+### Microservicio Compras
+
+Para ver el funcionamiento de este microservicio dirijase a la [documentación](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#compra)
+
+Se realiza una petición POST para realizar una compra válida:
+
+![compras_1](https://user-images.githubusercontent.com/24718808/53005378-6e4c9580-3433-11e9-8cf2-96fa5a901f8d.png)
+
+Se obtienen las compras realizadas
+
+![compras_get](https://user-images.githubusercontent.com/24718808/53005697-0c406000-3434-11e9-8337-e091bb7a08c3.png)
+
+Para probar la conexión a la base de datos se utilizó la herramienta [DBeaver](https://dbeaver.io/) como se muestra en la siguiente imagen, se configuran los parámetros de nuestra base de datos como la dirección Ip, puerto, Usuario y contraseña.
+
+![prueba_dveaver_1](https://user-images.githubusercontent.com/24718808/53005803-41e54900-3434-11e9-8ff2-ef1da80e80f9.png)
+
+
+Finalmente la siguiente imagen muestra las tablas creadas en la base de datos.
+
+![dbeaver_2](https://user-images.githubusercontent.com/24718808/53006074-d0f26100-3434-11e9-88a1-1a58daf80783.png)
+
+Para mas información sobre como se realiza la conexión a la base de datos dirjase al siguiente [link](https://github.com/danielbc09/Proyecto_CC/blob/master/docs/Documentacion.md#base-datos). 
+
+
+##Referencias
+
+- http://jj.github.io/CC/documentos/temas/Orquestacion
+- http://www.vagrantbox.es/
+- https://askubuntu.com/questions/465454/problem-with-the-installation-of-virtualbox
+- https://stackoverflow.com/questions/30075461/how-do-i-add-my-own-public-key-to-vagrant-vm
+- https://blog.scottlowe.org/2017/12/11/using-vagrant-with-azure/
+- https://opensource.com/article/17/6/ansible-postgresql-operations
+- https://stackoverflow.com/questions/256169/best-os-for-java-development
+- https://www.colocationamerica.com/blog/best-operating-systems-for-business-and-personal-use
+- https://www.ubuntupit.com/best-linux-server-distro-top-10-compared-recommendation/

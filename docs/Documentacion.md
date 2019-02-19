@@ -57,18 +57,20 @@ Imagen Arquitectura:
 
 ![arquitectura_app](https://user-images.githubusercontent.com/24718808/49256160-6978d680-f42e-11e8-8fbb-59359542db3b.jpg)
 
+En el transcuros del desarrollo de la aplicación, se pudo crear los microservicios de Gestión de usuarios, Gestión y validación de tiquetes y el de compra de tiquetes.
+
 <a name="springboot"></a>
 ## Expliación General Spring Framerwork
 
 
 Para el desarrollo de la aplicación se eligió el framerwork spring-boot el cual tiene una gran variedad de servicios para realizar microservicios en el lenguaje Java.
 
-Una de las ventajas de Spring es el desarrollo por diferentes componentes , los cuales son, como los controladores, Entidades, servicios y repositorios. Cada uno de los componentes tienen la siguiente función.
+Una de las ventajas de Spring es el desarrollo por diferentes componentes, como los controladores, entidades, servicios y repositorios. Cada uno de los componentes tienen la siguiente función.
 
-- Controladores Rest : Son controladores que se encargan de recibir la URL y el método http por el cliente , además de regresar un Objeto Json con la respuesta indicada.
-- Dominio O entidades: Son el dominio de negocio de nuestros Microservicios , se crean con el propósito de definir las entidades principales de nuestro sistema , además con  la ayuda del ORM hibernate se crean las tablas en la base de datos sin necesidad de realizar Queries SQL.
-- Servicios: Los servicios se definen como las operaciones que una clase dominio necesita realizar , es decir aquí se definen las operaciones lógicas de nuestro Modelo de negocio o entidades. Por ejemplo la creación de usuarios o la compra del tiquete.
-- Repositorios: Utilizan Una interfaz jpa y son los encargados de abstraer las operaciones con la base de datos , se utilizan para realizar la persistencia del objeto y en la aplicación se comunican con los servicios.
+- Controladores Rest : Son controladores que se encargan de recibir la URL y el método http que el el cliente realiza. Mapeaneste la petición Java para que se realice un servicio y finalmente regresar un Objeto Json con la respuesta indicada.
+- Dominio O entidades: Son el dominio de negocio de nuestros Microservicios, se crean con el propósito de definir las entidades principales de nuestro sistema, además con  la ayuda del ORM hibernate se crean las tablas en la base de datos sin necesidad de realizar Queries SQL.
+- Servicios: Los servicios se definen como las operaciones que una clase dominio necesita realizar definiendo en el servicio las operaciones lógicas de nuestro Modelo de negocio o entidades. Por ejemplo la creación de usuarios o la compra del tiquete.
+- Repositorios: Utilizan Una interfaz jpa y son los encargados de abstraer las operaciones con la base de datos, se utilizan para realizar la persistencia del objeto y en la aplicación se comunican con los servicios.
 
 
 
@@ -76,14 +78,14 @@ Una de las ventajas de Spring es el desarrollo por diferentes componentes , los 
 <a name="desarrollo"></a>
 ## Desarrollo 
 
-El proyecto está desarrollado en el lenguaje Java con el Framework Spring-Boot , se escoge este framework ya que es fácil crear aplicaciones API Rest y su configuración es 
+El proyecto está desarrollado en el lenguaje Java con el Framework Spring-Boot, se escoge este framework ya que es fácil crear aplicaciones API Rest y su configuración es 
 relativamente sencilla.Este Framework se enfoca en las buenas prácticas propuestas por en el AOP([Aspect Oriented Programming](https://docs.spring.io/spring/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html)), 
-el cual promueve prácticas de desarrollo con bajo acoplamiento, dividiendo capas como Repositorios, Servicios , y  Modelos de negocio.
-Además de las buenas prácticas que se proponen en este Framework es fácil de configurar con cualquier base de datos , en este caso utilizando Hibernate como ORM 
+las cuales promueven desarrollo con bajo acoplamiento, dividiendo capas como Repositorios, Servicios y  Modelos de negocio.
+Además de las buenas prácticas que se proponen, este Framework es fácil de configurar con cualquier base de datos, en este caso utilizando Hibernate como ORM 
 se puede configurar el acceso a  la Base de datos [PostgreSQL](https://www.postgresql.org/).
 
 <a name="base-datos"></a>
-### Conexion con la base de datos Postgresql
+### Conexión con la base de datos Postgresql
 
 Para realizar la conexión con la base de datos, se utiliza el driver JPA de Spring boot en el [archivo](https://github.com/danielbc09/Proyecto_CC/blob/master/src/main/resources/application.properties) en el cual
 se configuran las siguientes propiedades:
@@ -376,15 +378,16 @@ Las referencias de estas prácticas están en los siguientes links:
 
  
 <a name="test"></a>
-## Test Aplicación 
+## Test Aplicación  
 
-Se va a realizar el desarrollo basado en pruebas unitarias, cada método tendrá su test unitario, se espera realizar un cubrimiento de código entre el 75 y 90 por ciento de la 
-aplicación con pruebas unitarias.
-Spring Framework con su manejo de Inyección de dependencias  nos ayuda a desarrollar código que sea fácil de probar. Utilizando el [Framework Junit](https://junit.org/junit5/) 
-para las pruebas unitarias , además de [Mockito](https://site.mockito.org/) para manejar una sintaxis estilo BDD y realizar los Mocks, nos da herramientas para poder crear una 
-aplicación bien probada.
+Spring Framework con su manejo de Inyección de dependencias  nos ayuda a desarrollar código que sea fácil de probar. Se utiliza el [Framework Junit](https://junit.org/junit5/)
+uno de los frameworks más usados en java para realizar pruebas unitarias, además de [Mockito](https://site.mockito.org/) para manejar una sintaxis estilo BDD y realizar los Mocks.
+
+Con esto nos aseguramos que nuestra aplicación esté probada antes de desplegarla y también las pruebas unitarias nos ayudan a saber dónde están los errores de la aplicación cuando se realizan modificaciones, es decir que son una piedra angular
+para la automatización con integración continua.
 
 En cuanto a las pruebas funcionales de las API Rest se utiliza la herramienta [PostMan](https://www.getpostman.com/).
+
 
 <a name="hitos"></a>
 # Hitos del proyecto 
